@@ -12,7 +12,7 @@ class DiscoverTabTableViewCell: UITableViewCell {
 
     static let identifier = "DiscoverTabTableViewCell"
     
-    private let moviePlayButton: UIButton = {
+    private lazy var moviePlayButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "play.circle", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
         button.tintColor = .label
@@ -20,14 +20,14 @@ class DiscoverTabTableViewCell: UITableViewCell {
         return button
     }()
     
-    private let movieLabel: UILabel = {
+    private lazy var movieLabel: UILabel = {
         let text = UILabel()
         text.numberOfLines = .zero
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
     
-    private let moviePosterImageView: UIImageView = {
+    private lazy var moviePosterImageView: UIImageView = {
         let image = UIImageView ()
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
@@ -65,12 +65,12 @@ class DiscoverTabTableViewCell: UITableViewCell {
         ])
     }
     
-    public func configure(with model: MovieViewModel) {
+    public func configure(with movie: MovieViewModel) {
 
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterURL)") else { return }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterURL)") else { return }
         
         moviePosterImageView.sd_setImage(with: url)
-        movieLabel.text = model.movieName
+        movieLabel.text = movie.movieName
     }
     
     required init?(coder: NSCoder) {

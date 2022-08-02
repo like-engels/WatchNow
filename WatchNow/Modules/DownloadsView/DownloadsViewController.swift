@@ -24,6 +24,7 @@ class DownloadsViewController: UIViewController {
         title = "Downloads"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
+        view.insetsLayoutMarginsFromSafeArea = true
         
         downloadsTable.delegate = self
         downloadsTable.dataSource = self

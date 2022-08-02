@@ -17,7 +17,7 @@ class CollectionViewTableViewCell: UITableViewCell {
     
     weak var delegate: CollectionViewTableViewCellDelegate?
     
-    private var movies: [Movie] = [Movie]()
+    private var movies = [Movie]()
     
     private lazy var collectionViewLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -93,7 +93,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         let movie = movies[indexPath.row]
         guard let movieName = movie.original_name ?? movie.original_title else { return }
         
-        APICaller.shared.getMovie(with: movieName + "trailer") { [weak self] result in
+        APIManager.shared.getMovie(with: movieName + "trailer") { [weak self] result in
             switch result {
             case .success(let video):
                 let movie = self?.movies[indexPath.row]

@@ -12,7 +12,7 @@ class MovieCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "MovieCollectionViewCell"
         
-    private let movieCover: UIImageView = {
+    private lazy var movieCover: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         return imageView

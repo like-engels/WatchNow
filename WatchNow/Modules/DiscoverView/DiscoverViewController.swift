@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  UpcomingViewController.swift
 //  Necflox clone
 //
 //  Created by User-D on 7/20/22.
@@ -7,69 +7,60 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class DiscoverViewController: UIViewController {
     
     private var movies = [Movie]()
     
-    private let discoverTableView: UITableView = {
+    private let upcomingTable: UITableView = {
         let table = UITableView()
         table.register(DiscoverTabTableViewCell.self, forCellReuseIdentifier: DiscoverTabTableViewCell.identifier)
         return table
-    }()
-    
-    private let searchController: UISearchController = {
-        let controller = UISearchController(searchResultsController: SearchResultsViewController())
-        controller.searchBar.placeholder = "Search movies or TV show..."
-        controller.searchBar.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        controller.searchBar.searchBarStyle = .prominent
-        return controller
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        title = "Search"
+        title = "Upcoming"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
-        navigationItem.searchController = searchController
-        navigationController?.navigationBar.tintColor = .label
         view.insetsLayoutMarginsFromSafeArea = true
+        
+        view.addSubview(upcomingTable)
+        upcomingTable.delegate = self
+        upcomingTable.dataSource = self
 
-        discoverTableView.delegate = self
-        discoverTableView.dataSource = self
-        searchController.searchResultsUpdater = self
-
-        fetchDiscoverMovies()
-
-        view.addSubview(discoverTableView)
+        fetchUpcoming()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        discoverTableView.frame = view.bounds
+        upcomingTable.frame = view.bounds
     }
     
-    private func fetchDiscoverMovies() {
-        APIManager.shared.getDiscoverFeed { [weak self] result in
+    private func fetchUpcoming() {
+        APIManager.shared.getUpcomingMovies { [weak self] result in
             switch result {
             case .success(let movies):
                 self?.movies = movies
                 DispatchQueue.main.async {
-                    self?.discoverTableView.reloadData()
+                    self?.upcomingTable.reloadData()
                 }
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
     }
+    
 }
 
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        movies.count
+extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movies.count
     }
     
-    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
         
         cell.configure(with: MovieViewModel(movieName: movies[indexPath.row].original_name ?? movies[indexPath.row].original_title ?? "", posterURL: movies[indexPath.row].poster_path ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].media_type ?? ""))
@@ -77,11 +68,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    internal func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        140
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
-    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let movie = movies[indexPath.row]
@@ -102,37 +93,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-}
-
-extension SearchViewController: UISearchResultsUpdating, SearchResultsViewControllerDelegate {
     
-    internal func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        
-        guard let query = searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, query.trimmingCharacters(in: .whitespaces).count >= 3, let resultController = searchController.searchResultsController as? SearchResultsViewController else { return }
-        
-        APIManager.shared.search(with: query) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let queries):
-                    resultController.moviesQuery = queries
-                    resultController.filteredResultsCollectionView.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    internal func SearchResultsViewControllerDidTapItem(_ viewModel: MovieVideoViewModel) {
-        DispatchQueue.main.async { [weak self] in
-            let vc = MoviePreviewViewController()
-            vc.configure(with: viewModel)
-            self?.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    
-    internal func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
@@ -143,10 +105,10 @@ extension SearchViewController: UISearchResultsUpdating, SearchResultsViewContro
             }
         return config
     }
-
+    
 }
 
-extension SearchViewController {
+extension DiscoverViewController {
     private func downloadMovieAt(indexPath: IndexPath) {
         
         DataPersistenceManager.shared.downloadMovieWith(model: movies[indexPath.row]) { result in

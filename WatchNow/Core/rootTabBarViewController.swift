@@ -17,7 +17,7 @@ class rootTabBarViewController: UITabBarController {
         
         // all navigationbar items
         let homeVC = UINavigationController(rootViewController: HomepageViewController())
-        let discoverVC = UINavigationController(rootViewController: DiscoverviewController())
+        let discoverVC = UINavigationController(rootViewController: DiscoverViewController())
         let searchVC = UINavigationController(rootViewController: SearchViewController())
         let downloadsVC = UINavigationController(rootViewController: DownloadsViewController())
         

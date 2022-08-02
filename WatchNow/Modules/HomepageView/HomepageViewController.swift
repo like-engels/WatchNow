@@ -40,6 +40,7 @@ class HomepageViewController: UIViewController {
         title = "Homepage"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
+        view.insetsLayoutMarginsFromSafeArea = true
         
         homeFeedTable.delegate = self
         homeFeedTable.dataSource = self
@@ -55,7 +56,7 @@ class HomepageViewController: UIViewController {
     }
     
     private func configureHeroHeader() {
-        APICaller.shared.getTrendingMovies { movie in
+        APIManager.shared.getTrendingMovies { movie in
             switch movie {
             case .success(let movie):
                 self.randomSelectedBanner = movie.randomElement()
@@ -100,7 +101,7 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            APICaller.shared.getTrendingMovies { results in
+            APIManager.shared.getTrendingMovies { results in
                 switch results {
                 case .success(let movies):
                     cell.configure(with: movies)
@@ -109,7 +110,7 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         case Sections.TrendingTV.rawValue:
-            APICaller.shared.getTrendingTVs { results in
+            APIManager.shared.getTrendingSeries { results in
                 switch results {
                 case .success(let movies):
                     cell.configure(with: movies)
@@ -118,7 +119,7 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         case Sections.Popular.rawValue:
-            APICaller.shared.getPopularMovies { results in
+            APIManager.shared.getPopularMovies { results in
                 switch results {
                 case .success(let movies):
                     cell.configure(with: movies)
@@ -127,7 +128,7 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         case Sections.Upcoming.rawValue:
-            APICaller.shared.getUpcomingMovies { results in
+            APIManager.shared.getUpcomingMovies { results in
                 switch results {
                 case .success(let movies):
                     cell.configure(with: movies)
@@ -136,7 +137,7 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
         case Sections.TopRated.rawValue:
-            APICaller.shared.getTopRatedMovies { results in
+            APIManager.shared.getTopRatedMovies { results in
                 switch results {
                 case .success(let movies):
                     cell.configure(with: movies)
