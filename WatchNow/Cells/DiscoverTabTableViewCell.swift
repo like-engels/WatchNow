@@ -65,7 +65,7 @@ class DiscoverTabTableViewCell: UITableViewCell {
         ])
     }
     
-    public func configure(with movie: MovieViewModel) {
+    public func configure(with movie: ThinMovie) {
 
         guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(movie.posterURL)") else { return }
         

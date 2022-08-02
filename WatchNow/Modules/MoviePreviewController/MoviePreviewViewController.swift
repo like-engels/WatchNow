@@ -79,7 +79,7 @@ class MoviePreviewViewController: UIViewController {
         ])
     }
     
-    func configure(with model: MovieVideoViewModel) {
+    func configure(with model: ThinYoutubeTrailer) {
         movieLabel.text = model.title
         overviewLabel.text = model.overview
         

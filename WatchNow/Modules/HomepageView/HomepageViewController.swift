@@ -174,10 +174,10 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomepageViewController: CollectionViewTableViewCellDelegate {
-    func CollectionViewTableViewDidTapCell(_ cell: CollectionViewTableViewCell, viewModel: MovieVideoViewModel) {
+    func CollectionViewTableViewDidTapCell(_ cell: CollectionViewTableViewCell, model: ThinYoutubeTrailer) {
         DispatchQueue.main.async { [weak self] in
             let vc = MoviePreviewViewController()
-            vc.configure(with: viewModel)
+            vc.configure(with: model)
             self?.navigationController?.pushViewController(vc, animated: true)
         }
     }

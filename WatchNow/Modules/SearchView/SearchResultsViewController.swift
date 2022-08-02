@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchResultsViewControllerDelegate: AnyObject {
-    func SearchResultsViewControllerDidTapItem(_ viewModel: MovieVideoViewModel)
+    func SearchResultsViewControllerDidTapItem(_ model: ThinYoutubeTrailer)
 }
 
 class SearchResultsViewController: UIViewController {

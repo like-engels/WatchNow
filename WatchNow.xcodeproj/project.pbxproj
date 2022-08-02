@@ -103,6 +103,7 @@
 			children = (
 				3923BB0D28983DBF00013198 /* NetworkManager */,
 				3923BB0C28983DB200013198 /* Endpoint */,
+				392A64BB288890750030DF06 /* CoreData */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -209,7 +210,6 @@
 				3923BB0F28983DE300013198 /* Core */,
 				3923BB0B28983DA800013198 /* Modules */,
 				3923BB0A28983DA000013198 /* Services */,
-				392A64BB288890750030DF06 /* CoreData */,
 				392A64B9288890500030DF06 /* Models */,
 				3906FC4E288EF1C600E69348 /* Views */,
 				392A64B8288890490030DF06 /* Cells */,
