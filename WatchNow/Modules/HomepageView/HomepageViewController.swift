@@ -35,7 +35,7 @@ class HomepageViewController: UIViewController {
     private var randomSelectedBanner: Movie?
     private var headerView: HeroHeaderView?
     private var cancellables = Set<AnyCancellable>()
-    private var service = TheMovieDBNetworkAPIManagerImplementation()
+    private var service = TheMovieDBNetworkAPIManagerImplementation.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,37 +100,19 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
         
         cell.delegate = self
-        
+        var test: EndpointImplementation
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            lazy var cancellable = self.service
-                .request(from: .getTrendingMovies)
-                .receive(on: DispatchQueue.main)
-                .sink { (res) in
-                } receiveValue: { res in
-                    cell.configure(with: res.results)
-                }
-            self.cancellables.insert(cancellable)
+            test = .getTrendingMovies
+            configureCell()
 
         case Sections.TrendingTV.rawValue:
-            lazy var cancellable = self.service
-                .request(from: .getTrendingSeries)
-                .receive(on: DispatchQueue.main)
-                .sink { (res) in
-                } receiveValue: { res in
-                    cell.configure(with: res.results)
-                }
-            self.cancellables.insert(cancellable)
+            test = .getTrendingSeries
+            configureCell()
 
         case Sections.Popular.rawValue:
-            lazy var cancellable = self.service
-                .request(from: .getPopularMovies)
-                .receive(on: DispatchQueue.main)
-                .sink { (res) in
-                } receiveValue: { res in
-                    cell.configure(with: res.results)
-                }
-            self.cancellables.insert(cancellable)
+            test = .getPopularMovies
+            configureCell()
 
         case Sections.Upcoming.rawValue:
             lazy var cancellable = self.service
@@ -155,6 +137,18 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             return UITableViewCell()
         }
+        
+        func configureCell() {
+            lazy var cancellable = self.service
+                .request(from: test)
+                .receive(on: DispatchQueue.main)
+                .sink { (res) in
+                } receiveValue: { res in
+                    cell.configure(with: res.results)
+                }
+            self.cancellables.insert(cancellable)
+        }
+        
         return cell
     }
     

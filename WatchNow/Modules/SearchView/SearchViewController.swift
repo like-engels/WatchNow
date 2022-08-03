@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
     
     private var movies = [Movie]()
     private var cancellables = Set<AnyCancellable>()
-    private var service = TheMovieDBNetworkAPIManagerImplementation()
+    private var service = TheMovieDBNetworkAPIManagerImplementation.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()

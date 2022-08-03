@@ -12,7 +12,7 @@ class DiscoverViewController: UIViewController {
     
     private var movies = [Movie]()
     private var cancellables = Set<AnyCancellable>()
-    private let service = TheMovieDBNetworkAPIManagerImplementation()
+    private let service = TheMovieDBNetworkAPIManagerImplementation.shared
     
     private let upcomingTable: UITableView = {
         let table = UITableView()

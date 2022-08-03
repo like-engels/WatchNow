@@ -13,6 +13,8 @@ protocol NetworkAPIManagerBuilder {
 }
 
 class TheMovieDBNetworkAPIManagerImplementation: NetworkAPIManagerBuilder {
+    static let shared = TheMovieDBNetworkAPIManagerImplementation()
+
     func request(from endpoint: EndpointImplementation) -> AnyPublisher<Movies, NetworkErrorManager> {
         
         let decoder = JSONDecoder()
