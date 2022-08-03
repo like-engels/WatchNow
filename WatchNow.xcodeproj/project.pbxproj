@@ -14,7 +14,8 @@
 		014909E2288E273600502CF3 /* ThinYoutubeTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909E1288E273600502CF3 /* ThinYoutubeTrailer.swift */; };
 		014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014909E7288E5D5D00502CF3 /* WatchNow.xcdatamodeld */; };
 		014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */; };
-		3923BB162898428000013198 /* APIEndpointError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923BB152898428000013198 /* APIEndpointError.swift */; };
+		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
+		3923BB162898428000013198 /* NetworkErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923BB152898428000013198 /* NetworkErrorManager.swift */; };
 		3923BB182898428C00013198 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923BB172898428C00013198 /* APIManager.swift */; };
 		392A649B288872B20030DF06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A649A288872B20030DF06 /* AppDelegate.swift */; };
 		392A649D288872B20030DF06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A649C288872B20030DF06 /* SceneDelegate.swift */; };
@@ -45,7 +46,8 @@
 		014909E1288E273600502CF3 /* ThinYoutubeTrailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinYoutubeTrailer.swift; sourceTree = "<group>"; };
 		014909E8288E5D5D00502CF3 /* WatchNow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchNow.xcdatamodel; sourceTree = "<group>"; };
 		014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
-		3923BB152898428000013198 /* APIEndpointError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpointError.swift; sourceTree = "<group>"; };
+		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
+		3923BB152898428000013198 /* NetworkErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorManager.swift; sourceTree = "<group>"; };
 		3923BB172898428C00013198 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		392A6497288872B20030DF06 /* WatchNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		392A649A288872B20030DF06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -81,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0194F8DB2899D5CE00269E40 /* NetworkAPIManager */ = {
+			isa = PBXGroup;
+			children = (
+				0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */,
+			);
+			path = NetworkAPIManager;
+			sourceTree = "<group>";
+		};
 		3906FC4E288EF1C600E69348 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +112,6 @@
 			isa = PBXGroup;
 			children = (
 				3923BB0D28983DBF00013198 /* NetworkManager */,
-				3923BB0C28983DB200013198 /* Endpoint */,
 				392A64BB288890750030DF06 /* CoreData */,
 			);
 			path = Services;
@@ -131,7 +140,9 @@
 		3923BB0D28983DBF00013198 /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				3923BB152898428000013198 /* APIEndpointError.swift */,
+				0194F8DB2899D5CE00269E40 /* NetworkAPIManager */,
+				3923BB0C28983DB200013198 /* Endpoint */,
+				3923BB152898428000013198 /* NetworkErrorManager.swift */,
 				3923BB172898428C00013198 /* APIManager.swift */,
 			);
 			path = NetworkManager;
@@ -340,11 +351,12 @@
 				014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */,
 				3942261C288B0452008CA328 /* SearchResultsViewController.swift in Sources */,
 				392A64B4288884EA0030DF06 /* SearchViewController.swift in Sources */,
-				3923BB162898428000013198 /* APIEndpointError.swift in Sources */,
+				3923BB162898428000013198 /* NetworkErrorManager.swift in Sources */,
 				392A649F288872B20030DF06 /* rootTabBarViewController.swift in Sources */,
 				014909DE288DF74800502CF3 /* YoutubeVideo.swift in Sources */,
 				39422615288A15C9008CA328 /* DiscoverTabTableViewCell.swift in Sources */,
 				014547BA2898914200608958 /* URL+AppendingQueryParameters.swift in Sources */,
+				0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */,
 				014909E0288E215E00502CF3 /* MoviePreviewViewController.swift in Sources */,
 				392A64BD288890AA0030DF06 /* CollectionViewTableViewCell.swift in Sources */,
 				014909E2288E273600502CF3 /* ThinYoutubeTrailer.swift in Sources */,

@@ -9,13 +9,13 @@ import UIKit
 import WebKit
 
 class MoviePreviewViewController: UIViewController {
-    lazy var webView: WKWebView = {
+    private var webView: WKWebView = {
         var webview = WKWebView()
         webview.translatesAutoresizingMaskIntoConstraints = false
         return webview
     }()
 
-    lazy var movieLabel: UILabel = {
+    private var movieLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 22, weight: .bold)
@@ -23,7 +23,7 @@ class MoviePreviewViewController: UIViewController {
         return label
     }()
     
-    lazy var overviewLabel: UILabel = {
+    private var overviewLabel: UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 18, weight: .light)
@@ -31,7 +31,7 @@ class MoviePreviewViewController: UIViewController {
         return label
     }()
     
-    lazy var downloadButton: UIButton = {
+    private var downloadButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .red

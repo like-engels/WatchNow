@@ -7,15 +7,7 @@
 
 import UIKit
 
-protocol SearchResultsViewControllerDelegate: AnyObject {
-    func SearchResultsViewControllerDidTapItem(_ model: ThinYoutubeTrailer)
-}
-
 class SearchResultsViewController: UIViewController {
-    
-    public var moviesQuery = [Movie]()
-    
-    weak var delegate: SearchResultsViewControllerDelegate?
     
     public let filteredResultsCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -23,13 +15,16 @@ class SearchResultsViewController: UIViewController {
         collectionViewLayout.minimumInteritemSpacing = 0
         collectionViewLayout.minimumLineSpacing = 4
         collectionViewLayout.itemSize = CGSize(width: 100, height: 180)
-
+        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         return collectionView
-
+        
     }()
+    
+    public var moviesQuery = [Movie]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,16 +61,16 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         cell.clipsToBounds = true
         return cell
     }
-
+    
     internal func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
-                let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { [weak self] _ in
+                let downloadAction = UIAction(title: "Download", state: .off) { [weak self] _ in
                     self?.downloadMovieAt(indexPath: indexPath)
                 }
-                return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+                return UIMenu(title: "Movie Options", options: .displayInline, children: [downloadAction])
             }
         return config
     }
@@ -83,7 +78,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
 
 extension SearchResultsViewController {
     private func downloadMovieAt(indexPath: IndexPath) {
-        DataPersistenceManager.shared.downloadMovieWith(model: moviesQuery[indexPath.row]) { result in
+        DataPersistenceManager.shared.downloadMovieWith(movie: moviesQuery[indexPath.row]) { result in
             switch result {
             case .success(()):
                 print("Downloaded to Database")
@@ -93,5 +88,4 @@ extension SearchResultsViewController {
         }
         print("Downloading... \(moviesQuery[indexPath.row].original_title ?? moviesQuery[indexPath.row].original_name ?? "")")
     }
-
 }

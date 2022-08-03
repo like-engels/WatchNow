@@ -11,7 +11,7 @@ import CoreData
 
 class DataPersistenceManager {
     
-    enum DatabaseError: Error {
+    enum CoreDataError: Error {
         case failedToSaveData
         case failedToFetchData
         case failedToEraseData
@@ -19,7 +19,7 @@ class DataPersistenceManager {
     
     static let shared = DataPersistenceManager()
     
-    func downloadMovieWith(model: Movie, completion: @escaping (Result<Void, Error>) -> Void) {
+    func downloadMovieWith(movie: Movie, completion: @escaping (Result<Void, Error>) -> Void) {
         
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
@@ -27,27 +27,27 @@ class DataPersistenceManager {
         
         let item = MovieItem(context: context)
         
-        item.id = Int64(model.id)
-        item.original_name = model.original_name
-        item.original_title = model.original_title
-        item.overview = model.overview
-        item.poster_path = model.poster_path
-        item.release_date = model.release_date
-        item.vote_average = model.vote_average ?? 0
-        item.vote_count = Int64(model.vote_count)
+        item.id = Int64(movie.id)
+        item.original_name = movie.original_name
+        item.original_title = movie.original_title
+        item.overview = movie.overview
+        item.poster_path = movie.poster_path
+        item.release_date = movie.release_date
+        item.vote_average = movie.vote_average ?? 0
+        item.vote_count = Int64(movie.vote_count)
         
         do {
             try context.save()
             completion(.success(()))
         } catch {
             print(error.localizedDescription)
-            completion(.failure(DatabaseError.failedToSaveData))
+            completion(.failure(CoreDataError.failedToSaveData))
         }
     }
 }
 
 extension DataPersistenceManager {
-    func fetchingMoviesFromDatabase(completion: @escaping (Result<[MovieItem], Error>) -> Void) {
+    func fetchingMoviesFromCoreData(completion: @escaping (Result<[MovieItem], Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let context = appDelegate.persistentContainer.viewContext
@@ -60,22 +60,22 @@ extension DataPersistenceManager {
             let movies = try context.fetch(request)
             completion(.success(movies))
         } catch {
-            completion(.failure(DatabaseError.failedToFetchData))
+            completion(.failure(CoreDataError.failedToFetchData))
         }
     }
     
-    func deleteMovieFromDataBase(model: MovieItem, completion: @escaping (Result<Void, Error>) -> Void) {
+    func deleteMovieFromCoreData(movie: MovieItem, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         
         let context = appDelegate.persistentContainer.viewContext
         
-        context.delete(model)
+        context.delete(movie)
         
         do {
             try context.save()
             completion(.success(()))
         } catch {
-            print(DatabaseError.failedToEraseData)
+            print(CoreDataError.failedToEraseData)
         }
     }
 }

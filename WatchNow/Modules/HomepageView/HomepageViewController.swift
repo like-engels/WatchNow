@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 enum Sections: Int {
     case TrendingMovies = 0
@@ -17,22 +18,24 @@ enum Sections: Int {
 
 class HomepageViewController: UIViewController {
     
-    private var randomSelectedBanner: Movie?
-    private var headerView: HeroHeaderView?
-    
-    let sectionTitles: [String] = [
+    private let sectionTitles = [
         "Trending Movies",
         "Popular",
         "Trending TV",
         "Top rated",
         "Upcoming Movies"
     ]
-
+    
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.identifier)
         return table
     }()
+
+    private var randomSelectedBanner: Movie?
+    private var headerView: HeroHeaderView?
+    private var cancellables = Set<AnyCancellable>()
+    private var service = TheMovieDBNetworkAPIManagerImplementation()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,22 +58,21 @@ class HomepageViewController: UIViewController {
         
     }
     
-    private func configureHeroHeader() {
-        APIManager.shared.getTrendingMovies { movie in
-            switch movie {
-            case .success(let movie):
-                self.randomSelectedBanner = movie.randomElement()
-                guard let selectedBanner = self.randomSelectedBanner else { return }
-                self.headerView?.configure(with: selectedBanner)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeFeedTable.frame = view.bounds
+    }
+    
+    private func configureHeroHeader() {
+        let cancellable = self.service
+            .request(from: .getTrendingMovies)
+            .sink { (res) in
+            } receiveValue: { res in
+                self.randomSelectedBanner = res.results.randomElement()
+                guard let selectedBanner = self.randomSelectedBanner else { return }
+                self.headerView?.configure(with: selectedBanner)
+            }
+        self.cancellables.insert(cancellable)
     }
     
     private func configureNavbar() {
@@ -80,7 +82,7 @@ class HomepageViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "arrow.down.to.line"), style: .done, target: self, action: nil)
         ]
         
-        navigationController?.navigationBar.tintColor = .label
+        // navigationController?.navigationBar.tintColor = .label
         
     }
 }
@@ -101,50 +103,55 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            APIManager.shared.getTrendingMovies { results in
-                switch results {
-                case .success(let movies):
-                    cell.configure(with: movies)
-                case .failure(let error):
-                    print(error.localizedDescription)
+            lazy var cancellable = self.service
+                .request(from: .getTrendingMovies)
+                .receive(on: DispatchQueue.main)
+                .sink { (res) in
+                } receiveValue: { res in
+                    cell.configure(with: res.results)
                 }
-            }
+            self.cancellables.insert(cancellable)
+
         case Sections.TrendingTV.rawValue:
-            APIManager.shared.getTrendingSeries { results in
-                switch results {
-                case .success(let movies):
-                    cell.configure(with: movies)
-                case .failure(let error):
-                    print(error.localizedDescription)
+            lazy var cancellable = self.service
+                .request(from: .getTrendingSeries)
+                .receive(on: DispatchQueue.main)
+                .sink { (res) in
+                } receiveValue: { res in
+                    cell.configure(with: res.results)
                 }
-            }
+            self.cancellables.insert(cancellable)
+
         case Sections.Popular.rawValue:
-            APIManager.shared.getPopularMovies { results in
-                switch results {
-                case .success(let movies):
-                    cell.configure(with: movies)
-                case .failure(let error):
-                    print(error.localizedDescription)
+            lazy var cancellable = self.service
+                .request(from: .getPopularMovies)
+                .receive(on: DispatchQueue.main)
+                .sink { (res) in
+                } receiveValue: { res in
+                    cell.configure(with: res.results)
                 }
-            }
+            self.cancellables.insert(cancellable)
+
         case Sections.Upcoming.rawValue:
-            APIManager.shared.getUpcomingMovies { results in
-                switch results {
-                case .success(let movies):
-                    cell.configure(with: movies)
-                case .failure(let error):
-                    print(error.localizedDescription)
+            lazy var cancellable = self.service
+                .request(from: .getUpcomingMovies)
+                .receive(on: DispatchQueue.main)
+                .sink { (res) in
+                } receiveValue: { res in
+                    cell.configure(with: res.results)
                 }
-            }
+            self.cancellables.insert(cancellable)
+
         case Sections.TopRated.rawValue:
-            APIManager.shared.getTopRatedMovies { results in
-                switch results {
-                case .success(let movies):
-                    cell.configure(with: movies)
-                case .failure(let error):
-                    print(error.localizedDescription)
+            lazy var cancellable = self.service
+                .request(from: .getTopRatedMovies)
+                .receive(on: DispatchQueue.main)
+                .sink { (res) in
+                } receiveValue: { res in
+                    cell.configure(with: res.results)
                 }
-            }
+            self.cancellables.insert(cancellable)
+
         default:
             return UITableViewCell()
         }

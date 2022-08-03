@@ -9,13 +9,13 @@ import UIKit
 
 class DownloadsViewController: UIViewController {
     
-    private var movies: [MovieItem] = [MovieItem]()
-    
     private let downloadsTable: UITableView = {
         let table = UITableView()
         table.register(DiscoverTabTableViewCell.self, forCellReuseIdentifier: DiscoverTabTableViewCell.identifier)
         return table
     }()
+
+    private var movies: [MovieItem] = [MovieItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +41,7 @@ class DownloadsViewController: UIViewController {
     }
     
     private func fetchLocalStorageForDownload() {
-        DataPersistenceManager.shared.fetchingMoviesFromDatabase { [weak self] result in
+        DataPersistenceManager.shared.fetchingMoviesFromCoreData { [weak self] result in
             switch result {
             case .success(let movies):
                 self?.movies = movies
@@ -76,7 +76,7 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch editingStyle {
         case .delete:
-            DataPersistenceManager.shared.deleteMovieFromDataBase(model: movies[indexPath.row]) { [weak self] result in
+            DataPersistenceManager.shared.deleteMovieFromCoreData(movie: movies[indexPath.row]) { [weak self] result in
                 switch result {
                 case .success():
                     print("Deleted from Database")

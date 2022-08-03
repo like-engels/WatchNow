@@ -29,6 +29,8 @@ class CollectionViewTableViewCell: UITableViewCell {
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
+        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -58,7 +60,7 @@ class CollectionViewTableViewCell: UITableViewCell {
     
     private func downloadMovieAt(indexPath: IndexPath) {
         
-        DataPersistenceManager.shared.downloadMovieWith(model: movies[indexPath.row]) { result in
+        DataPersistenceManager.shared.downloadMovieWith(movie: movies[indexPath.row]) { result in
             switch result {
             case .success(()):
                 print("Downloaded to Database")
@@ -115,10 +117,10 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
-                let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { [weak self] _ in
+                let downloadAction = UIAction(title: "Download", state: .off) { [weak self] _ in
                     self?.downloadMovieAt(indexPath: indexPath)
                 }
-                return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+                return UIMenu(title: "Movie Options", options: .displayInline, children: [downloadAction])
             }
         return config
     }

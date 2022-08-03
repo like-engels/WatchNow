@@ -7,104 +7,9 @@
 
 import Foundation
 
-enum APIError: Error {
-    case failedToGetData
-}
-
 class APIManager {
     static let shared = APIManager()
-    
-    func getTrendingMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndpointImplementation.getTrendingMovies.urlRequest) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(APIError.failedToGetData))
-            }
-        }
-        
-        task.resume()
-    }
-    
-    
-    func getTrendingSeries(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndpointImplementation.getTrendingSeries.urlRequest) { data, _, error in
-            guard let data = data, error == nil else { return }
-            
-            do {
-                let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(APIError.failedToGetData))
-            }
-        }
-        task.resume()
-    }
-    
-    func getUpcomingMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndpointImplementation.getUpcomingMovies.urlRequest) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(APIError.failedToGetData))
-            }
-        }
-        task.resume()
-    }
-    
-    func getPopularMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndpointImplementation.getPopularMovies.urlRequest) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(APIError.failedToGetData))
-            }
-        }
-        task.resume()
-    }
-    
-    func getTopRatedMovies(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndpointImplementation.getTopRatedMovies.urlRequest) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(APIError.failedToGetData))
-            }
-        }
-        task.resume()
-    }
-    
-    func getDiscoverFeed(completion: @escaping (Result<[Movie], Error>) -> Void) {
-        let task = URLSession.shared.dataTask(with: EndpointImplementation.getDiscoverFeed.urlRequest) { data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            do {
-                let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
-            } catch {
-                completion(.failure(APIError.failedToGetData))
-            }
-        }
-        task.resume()
-    }
-    
+
     func search(with query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
         
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
@@ -119,7 +24,7 @@ class APIManager {
                 let results = try JSONDecoder().decode(Movies.self, from: data)
                 completion(.success(results.results))
             } catch {
-                completion(.failure(APIError.failedToGetData))
+                completion(.failure(NetworkErrorManager.failedToGetData))
             }
         }
         task.resume()
@@ -139,7 +44,7 @@ class APIManager {
                 let results = try JSONDecoder().decode(TrailerVideo.self, from: data)
                 completion(.success(results.items[0]))
             } catch {
-                completion(.failure(APIError.failedToGetData))
+                completion(.failure(NetworkErrorManager.failedToGetData))
             }
         }
         task.resume()

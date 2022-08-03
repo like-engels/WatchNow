@@ -11,7 +11,7 @@ protocol EndpointBuilder {
     var api_key: String { get }
     var baseUrl: URL { get }
     var path: String { get }
-    var query: String { get }
+    var query: [String: String] { get }
     var urlRequest: URLRequest { get }
 }
 
@@ -57,27 +57,28 @@ extension EndpointImplementation: EndpointBuilder {
         }
     }
     
-    var query: String {
+    var query: [String: String] {
         switch self {
         case .getTrendingMovies, .getTrendingSeries, .getUpcomingMovies, .getPopularMovies, .getTopRatedMovies, .getDiscoverFeed:
-            return "api_key"
+            return ["api_key": self.api_key]
         }
     }
-
+    
     var urlRequest: URLRequest {
         switch self {
         case .getTrendingMovies:
-            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters([self.query: self.api_key]))
+            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters(self.query))
         case .getTrendingSeries:
-            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters([self.query: self.api_key]))
+            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters(self.query))
         case .getUpcomingMovies:
-            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters([self.query: self.api_key]))
+            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters(self.query))
         case .getPopularMovies:
-            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters([self.query: self.api_key]))
+            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters(self.query))
         case .getTopRatedMovies:
-            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters([self.query: self.api_key]))
+            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters(self.query))
         case .getDiscoverFeed:
-            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters([self.query: self.api_key]))
+            return URLRequest(url: self.baseUrl.appendingPathComponent(self.path).appendingQueryParameters(self.query))
+            
         }
     }
 }

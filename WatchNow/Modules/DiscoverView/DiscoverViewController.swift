@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 class DiscoverViewController: UIViewController {
     
     private var movies = [Movie]()
+    private var cancellables = Set<AnyCancellable>()
+    private let service = TheMovieDBNetworkAPIManagerImplementation()
     
     private let upcomingTable: UITableView = {
         let table = UITableView()
         table.register(DiscoverTabTableViewCell.self, forCellReuseIdentifier: DiscoverTabTableViewCell.identifier)
+        table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
 
@@ -38,28 +42,31 @@ class DiscoverViewController: UIViewController {
     }
     
     private func fetchUpcoming() {
-        APIManager.shared.getUpcomingMovies { [weak self] result in
-            switch result {
-            case .success(let movies):
-                self?.movies = movies
-                DispatchQueue.main.async {
+        lazy var cancellable = self.service
+            .request(from: .getDiscoverFeed)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (res) in
+                switch (res) {
+                case .finished:
                     self?.upcomingTable.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            } receiveValue: { [weak self] res in
+                self?.movies = res.results
             }
-        }
+        self.cancellables.insert(cancellable)
     }
     
 }
 
 extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
         
@@ -68,11 +75,11 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    internal func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let movie = movies[indexPath.row]
@@ -98,10 +105,10 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
-                let downloadAction = UIAction(title: "Download", subtitle: nil, image: nil, identifier: nil, discoverabilityTitle: nil, state: .off) { [weak self] _ in
+                let downloadAction = UIAction(title: "Download", state: .off) { [weak self] _ in
                     self?.downloadMovieAt(indexPath: indexPath)
                 }
-                return UIMenu(title: "", subtitle: nil, image: nil, identifier: nil, options: .displayInline, children: [downloadAction])
+                return UIMenu(title: "Movie Options", options: .displayInline, children: [downloadAction])
             }
         return config
     }
@@ -111,7 +118,7 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
 extension DiscoverViewController {
     private func downloadMovieAt(indexPath: IndexPath) {
         
-        DataPersistenceManager.shared.downloadMovieWith(model: movies[indexPath.row]) { result in
+        DataPersistenceManager.shared.downloadMovieWith(movie: movies[indexPath.row]) { result in
             switch result {
             case .success(()):
                 print("Downloaded to Database")
