@@ -28,13 +28,13 @@ class DataPersistenceManager {
         let item = MovieItem(context: context)
         
         item.id = Int64(movie.id)
-        item.original_name = movie.original_name
-        item.original_title = movie.original_title
+        item.originalName = movie.originalName
+        item.originalTitle = movie.originalName
         item.overview = movie.overview
-        item.poster_path = movie.poster_path
-        item.release_date = movie.release_date
-        item.vote_average = movie.vote_average ?? 0
-        item.vote_count = Int64(movie.vote_count)
+        item.posterPath = movie.posterPath
+        item.releaseDate = movie.releaseDate
+        item.voteAverage = movie.voteAverage ?? 0
+        item.voteCount = Int64(movie.voteCount)
         
         do {
             try context.save()

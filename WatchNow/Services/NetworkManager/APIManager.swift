@@ -22,7 +22,7 @@ class APIManager {
             }
             do {
                 let results = try JSONDecoder().decode(Movies.self, from: data)
-                completion(.success(results.results))
+                completion(.success(results.movies))
             } catch {
                 completion(.failure(NetworkErrorManager.failedToGetData))
             }

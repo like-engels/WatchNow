@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ThinMovie {
+struct MovieElement {
     var movieName: String
     var posterURL: String
     var movieOverview: String

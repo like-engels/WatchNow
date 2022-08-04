@@ -63,7 +63,7 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
         
-        cell.configure(with: ThinMovie(movieName: movies[indexPath.row].original_name ?? movies[indexPath.row].original_title ?? "", posterURL: movies[indexPath.row].poster_path ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].media_type ?? ""))
+        cell.configure(with: MovieElement(movieName: movies[indexPath.row].originalName ?? movies[indexPath.row].originalTitle ?? "", posterURL: movies[indexPath.row].posterPath ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].media_type ?? ""))
         
         return cell
     }
@@ -86,8 +86,12 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 if (self?.movies.count)! > 1 {
                     self?.movies.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                } else {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self?.movies.remove(at: indexPath.row)
                 }
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                
             }
         default: break;
         }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ThinYoutubeTrailer {
+struct MovieTrailer {
     var title: String
     var overview: String
     var youtubeVideo: YoutubeVideo

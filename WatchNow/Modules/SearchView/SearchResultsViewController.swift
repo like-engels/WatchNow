@@ -55,7 +55,7 @@ extension SearchResultsViewController: UICollectionViewDelegate, UICollectionVie
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
         
         let title = moviesQuery[indexPath.row]
-        cell.configurate(with: title.poster_path ?? "")
+        cell.configurate(with: title.posterPath ?? "")
         cell.contentMode = .scaleAspectFit
         cell.insetsLayoutMarginsFromSafeArea = true
         cell.clipsToBounds = true
@@ -86,6 +86,6 @@ extension SearchResultsViewController {
                 print(error.localizedDescription)
             }
         }
-        print("Downloading... \(moviesQuery[indexPath.row].original_title ?? moviesQuery[indexPath.row].original_name ?? "")")
+        print("Downloading... \(moviesQuery[indexPath.row].originalTitle ?? moviesQuery[indexPath.row].originalName ?? "")")
     }
 }

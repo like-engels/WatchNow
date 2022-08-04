@@ -68,7 +68,7 @@ class HomepageViewController: UIViewController {
             .request(from: .getTrendingMovies)
             .sink { (res) in
             } receiveValue: { res in
-                self.randomSelectedBanner = res.results.randomElement()
+                self.randomSelectedBanner = res.movies.randomElement()
                 guard let selectedBanner = self.randomSelectedBanner else { return }
                 self.headerView?.configure(with: selectedBanner)
             }
@@ -81,8 +81,6 @@ class HomepageViewController: UIViewController {
             UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil),
             UIBarButtonItem(image: UIImage(systemName: "arrow.down.to.line"), style: .done, target: self, action: nil)
         ]
-        
-        // navigationController?.navigationBar.tintColor = .label
         
     }
 }
@@ -100,39 +98,27 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
         
         cell.delegate = self
-        var test: EndpointImplementation
+        lazy var requestType: EndpointImplementation = .getTrendingMovies
+
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            test = .getTrendingMovies
             configureCell()
 
         case Sections.TrendingTV.rawValue:
-            test = .getTrendingSeries
+            requestType = .getTrendingSeries
             configureCell()
 
         case Sections.Popular.rawValue:
-            test = .getPopularMovies
+            requestType = .getPopularMovies
             configureCell()
 
         case Sections.Upcoming.rawValue:
-            lazy var cancellable = self.service
-                .request(from: .getUpcomingMovies)
-                .receive(on: DispatchQueue.main)
-                .sink { (res) in
-                } receiveValue: { res in
-                    cell.configure(with: res.results)
-                }
-            self.cancellables.insert(cancellable)
+            requestType = .getUpcomingMovies
+            configureCell()
 
         case Sections.TopRated.rawValue:
-            lazy var cancellable = self.service
-                .request(from: .getTopRatedMovies)
-                .receive(on: DispatchQueue.main)
-                .sink { (res) in
-                } receiveValue: { res in
-                    cell.configure(with: res.results)
-                }
-            self.cancellables.insert(cancellable)
+            requestType = .getTopRatedMovies
+            configureCell()
 
         default:
             return UITableViewCell()
@@ -140,11 +126,11 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         
         func configureCell() {
             lazy var cancellable = self.service
-                .request(from: test)
+                .request(from: requestType)
                 .receive(on: DispatchQueue.main)
-                .sink { (res) in
-                } receiveValue: { res in
-                    cell.configure(with: res.results)
+                .sink { res in
+                } receiveValue: { movie in
+                    cell.configure(with: movie.movies)
                 }
             self.cancellables.insert(cancellable)
         }
@@ -175,11 +161,11 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension HomepageViewController: CollectionViewTableViewCellDelegate {
-    func CollectionViewTableViewDidTapCell(_ cell: CollectionViewTableViewCell, model: ThinYoutubeTrailer) {
+    func CollectionViewTableViewDidTapCell(_ cell: CollectionViewTableViewCell, model: MovieTrailer) {
         DispatchQueue.main.async { [weak self] in
-            let vc = MoviePreviewViewController()
-            vc.configure(with: model)
-            self?.navigationController?.pushViewController(vc, animated: true)
+            let previewViewController = MoviePreviewViewController()
+            previewViewController.configure(with: model)
+            self?.navigationController?.pushViewController(previewViewController, animated: true)
         }
     }
 }

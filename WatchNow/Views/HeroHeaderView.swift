@@ -46,7 +46,6 @@ class HeroHeaderView: UIView {
         ]
         
         let downloadButtonConstraints = [
-            downloadButton.leadingAnchor.constraint(equalTo: centerXAnchor, constant: 10),
             downloadButton.trailingAnchor.constraint(greaterThanOrEqualTo: trailingAnchor, constant: -50),
             downloadButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -50),
             downloadButton.widthAnchor.constraint(greaterThanOrEqualToConstant: 100)
@@ -67,7 +66,7 @@ class HeroHeaderView: UIView {
     }
     
     func configure(with model: Movie) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.poster_path ?? "")") else { return }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model.posterPath ?? "")") else { return }
         heroImageView.sd_setImage(with: url, completed: nil)
     }
     

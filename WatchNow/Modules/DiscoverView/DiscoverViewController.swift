@@ -28,12 +28,13 @@ class DiscoverViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         view.insetsLayoutMarginsFromSafeArea = true
-        
-        view.addSubview(upcomingTable)
+
         upcomingTable.delegate = self
         upcomingTable.dataSource = self
 
         fetchUpcoming()
+        
+        view.addSubview(upcomingTable)
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,7 +54,7 @@ class DiscoverViewController: UIViewController {
                     print(error.localizedDescription)
                 }
             } receiveValue: { [weak self] res in
-                self?.movies = res.results
+                self?.movies = res.movies
             }
         self.cancellables.insert(cancellable)
     }
@@ -70,7 +71,7 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
         
-        cell.configure(with: ThinMovie(movieName: movies[indexPath.row].original_name ?? movies[indexPath.row].original_title ?? "", posterURL: movies[indexPath.row].poster_path ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].media_type ?? ""))
+        cell.configure(with: MovieElement(movieName: movies[indexPath.row].originalName ?? movies[indexPath.row].originalTitle ?? "", posterURL: movies[indexPath.row].posterPath ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].mediaType ?? ""))
         
         return cell
     }
@@ -84,16 +85,16 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
         
         let movie = movies[indexPath.row]
         
-        guard let movieName = movie.original_name ?? movie.original_title else { return }
+        guard let movieName = movie.originalName ?? movie.originalTitle else { return }
         
         APIManager.shared.getMovie(with: movieName) { result in
             switch result {
             case .success(let movieResult):
                 DispatchQueue.main.async { [weak self] in
-                    let vc = MoviePreviewViewController()
-                    let model = ThinYoutubeTrailer(title: movieName, overview: movie.overview ?? "", youtubeVideo: movieResult)
-                    vc.configure(with: model)
-                    self?.navigationController?.pushViewController(vc, animated: true)
+                    let previewViewController = MoviePreviewViewController()
+                    let model = MovieTrailer(title: movieName, overview: movie.overview ?? "", youtubeVideo: movieResult)
+                    previewViewController.configure(with: model)
+                    self?.navigationController?.pushViewController(previewViewController, animated: true)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -127,6 +128,6 @@ extension DiscoverViewController {
             }
         }
 
-        print("Downloading... \(movies[indexPath.row].original_title ?? movies[indexPath.row].original_name ?? "")")
+        print("Downloading... \(movies[indexPath.row].originalTitle ?? movies[indexPath.row].originalName ?? "")")
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CollectionViewTableViewCellDelegate: AnyObject {
-    func CollectionViewTableViewDidTapCell(_ cell: CollectionViewTableViewCell, model: ThinYoutubeTrailer)
+    func CollectionViewTableViewDidTapCell(_ cell: CollectionViewTableViewCell, model: MovieTrailer)
 }
 
 class CollectionViewTableViewCell: UITableViewCell {
@@ -30,7 +30,6 @@ class CollectionViewTableViewCell: UITableViewCell {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: MovieCollectionViewCell.identifier)
         collectionView.backgroundColor = .systemGroupedBackground
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.delegate = self
         collectionView.dataSource = self
         return collectionView
@@ -69,7 +68,7 @@ class CollectionViewTableViewCell: UITableViewCell {
             }
         }
 
-        print("Downloading... \(movies[indexPath.row].original_title ?? movies[indexPath.row].original_name ?? "")")
+        print("Downloading... \(movies[indexPath.row].originalTitle ?? movies[indexPath.row].originalName ?? "")")
     }
 }
 
@@ -79,7 +78,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MovieCollectionViewCell.identifier, for: indexPath) as? MovieCollectionViewCell else { return UICollectionViewCell() }
         
-        guard let movie = movies[indexPath.row].poster_path else { return UICollectionViewCell() }
+        guard let movie = movies[indexPath.row].posterPath else { return UICollectionViewCell() }
         cell.configurate(with: movie)
         
         return cell
@@ -93,7 +92,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let movie = movies[indexPath.row]
-        guard let movieName = movie.original_name ?? movie.original_title else { return }
+        guard let movieName = movie.originalName ?? movie.originalTitle else { return }
         
         APIManager.shared.getMovie(with: movieName + "trailer") { [weak self] result in
             switch result {
@@ -103,7 +102,7 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
                 
                 guard let strongSelf = self else { return }
                 
-                let model = ThinYoutubeTrailer(title: movieName, overview: movieOverview, youtubeVideo: video)
+                let model = MovieTrailer(title: movieName, overview: movieOverview, youtubeVideo: video)
                 
                 self?.delegate?.CollectionViewTableViewDidTapCell(strongSelf, model: model)
             case .failure(let error):
