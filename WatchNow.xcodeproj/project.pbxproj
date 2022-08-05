@@ -15,6 +15,9 @@
 		014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014909E7288E5D5D00502CF3 /* WatchNow.xcdatamodeld */; };
 		014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */; };
 		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
+		01EC0358289CA7830084E58E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0357289CA7830084E58E /* Coordinator.swift */; };
+		01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0359289CAF390084E58E /* AppCoordinator.swift */; };
+		01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */; };
 		3923BB162898428000013198 /* NetworkErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923BB152898428000013198 /* NetworkErrorManager.swift */; };
 		3923BB182898428C00013198 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923BB172898428C00013198 /* APIManager.swift */; };
 		392A649B288872B20030DF06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A649A288872B20030DF06 /* AppDelegate.swift */; };
@@ -47,6 +50,9 @@
 		014909E8288E5D5D00502CF3 /* WatchNow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchNow.xcdatamodel; sourceTree = "<group>"; };
 		014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
+		01EC0357289CA7830084E58E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		01EC0359289CAF390084E58E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashscreenViewController.swift; sourceTree = "<group>"; };
 		3923BB152898428000013198 /* NetworkErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkErrorManager.swift; sourceTree = "<group>"; };
 		3923BB172898428C00013198 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		392A6497288872B20030DF06 /* WatchNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -91,6 +97,21 @@
 			path = NetworkAPIManager;
 			sourceTree = "<group>";
 		};
+		01EC035D289CBD7A0084E58E /* SplashscreenView */ = {
+			isa = PBXGroup;
+			children = (
+				01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */,
+			);
+			path = SplashscreenView;
+			sourceTree = "<group>";
+		};
+		01EC0362289CBE840084E58E /* StateManager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = StateManager;
+			sourceTree = "<group>";
+		};
 		3906FC4E288EF1C600E69348 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +132,7 @@
 		3923BB0A28983DA000013198 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				01EC0362289CBE840084E58E /* StateManager */,
 				3923BB0D28983DBF00013198 /* NetworkManager */,
 				392A64BB288890750030DF06 /* CoreData */,
 			);
@@ -120,6 +142,7 @@
 		3923BB0B28983DA800013198 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				01EC035D289CBD7A0084E58E /* SplashscreenView */,
 				3923BB1028983EAA00013198 /* HomepageView */,
 				3923BB1128983EBC00013198 /* DiscoverView */,
 				3923BB1228983EC600013198 /* SearchView */,
@@ -151,6 +174,8 @@
 		3923BB0F28983DE300013198 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				01EC0357289CA7830084E58E /* Coordinator.swift */,
+				01EC0359289CAF390084E58E /* AppCoordinator.swift */,
 				392A649A288872B20030DF06 /* AppDelegate.swift */,
 				392A649C288872B20030DF06 /* SceneDelegate.swift */,
 				392A649E288872B20030DF06 /* rootTabBarViewController.swift */,
@@ -349,9 +374,11 @@
 			files = (
 				394226002889DAC5008CA328 /* Movie.swift in Sources */,
 				014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */,
+				01EC0358289CA7830084E58E /* Coordinator.swift in Sources */,
 				3942261C288B0452008CA328 /* SearchResultsViewController.swift in Sources */,
 				392A64B4288884EA0030DF06 /* SearchViewController.swift in Sources */,
 				3923BB162898428000013198 /* NetworkErrorManager.swift in Sources */,
+				01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */,
 				392A649F288872B20030DF06 /* rootTabBarViewController.swift in Sources */,
 				014909DE288DF74800502CF3 /* YoutubeVideo.swift in Sources */,
 				39422615288A15C9008CA328 /* DiscoverTabTableViewCell.swift in Sources */,
@@ -360,6 +387,7 @@
 				014909E0288E215E00502CF3 /* MoviePreviewViewController.swift in Sources */,
 				392A64BD288890AA0030DF06 /* CollectionViewTableViewCell.swift in Sources */,
 				014909E2288E273600502CF3 /* MovieTrailer.swift in Sources */,
+				01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */,
 				392A64BF2888B20E0030DF06 /* HeroHeaderView.swift in Sources */,
 				39422618288AE016008CA328 /* MovieElement.swift in Sources */,
 				014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */,
