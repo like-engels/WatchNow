@@ -27,6 +27,7 @@ class AppCoordinator: Coordinator {
     var type: CoordinatorType { .appCoordinator }
     
     func start() {
+        // launchMainScreen()
         showSplashsreen()
     }
     
@@ -36,7 +37,8 @@ class AppCoordinator: Coordinator {
     }
     
     func launchMainScreen() {
-        
+        let mainViewController = rootTabBarViewController()
+        navigationController?.pushViewController(mainViewController, animated: false)
     }
     
     required init(_ navigationController: UINavigationController) {

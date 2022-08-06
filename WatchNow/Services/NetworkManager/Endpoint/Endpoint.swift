@@ -29,7 +29,14 @@ extension EndpointImplementation: EndpointBuilder {
     var api_key: String {
         switch self {
         case .getTrendingMovies, .getTrendingSeries, .getUpcomingMovies, .getPopularMovies, .getTopRatedMovies, .getDiscoverFeed:
-            return "a7c653195b0d9633df4a71ac8a2b4e8e"
+            var keys: NSDictionary?
+            if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist") {
+                keys = NSDictionary(contentsOfFile: path)
+            }
+            
+            lazy var dict = keys
+            let apiKey = dict!["TheMovieDBKey"] as? String
+            return apiKey!
         }
     }
     

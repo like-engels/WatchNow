@@ -34,7 +34,6 @@ class rootTabBarViewController: UITabBarController {
         downloadsVC.title = "Downloads"
         
         // colouring labels and icons
-        tabBar.tintColor = .label
         
         setViewControllers([homeVC, discoverVC, searchVC, downloadsVC], animated: true)
     }
