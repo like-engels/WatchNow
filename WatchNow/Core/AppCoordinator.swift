@@ -7,7 +7,17 @@
 
 import UIKit
 
+enum SplashscreenState {
+    case loading
+    case success
+    case failure
+    case unknown
+}
+
 class AppCoordinator: Coordinator {
+    
+    @Published var statusIndicator: String = "Loading"
+
     var navigationController: UINavigationController?
     
     var finishDelegate: CoordinatorFinishDelegate?
@@ -17,11 +27,12 @@ class AppCoordinator: Coordinator {
     var type: CoordinatorType { .appCoordinator }
     
     func start() {
-
+        showSplashsreen()
     }
     
     func showSplashsreen() {
-        
+        let splashscreenViewController = SplashscreenViewController()
+        navigationController?.pushViewController(splashscreenViewController, animated: false)
     }
     
     func launchMainScreen() {

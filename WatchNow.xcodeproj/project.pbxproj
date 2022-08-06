@@ -14,6 +14,7 @@
 		014909E2288E273600502CF3 /* MovieTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909E1288E273600502CF3 /* MovieTrailer.swift */; };
 		014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014909E7288E5D5D00502CF3 /* WatchNow.xcdatamodeld */; };
 		014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */; };
+		0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */; };
 		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
 		01EC0358289CA7830084E58E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0357289CA7830084E58E /* Coordinator.swift */; };
 		01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0359289CAF390084E58E /* AppCoordinator.swift */; };
@@ -49,6 +50,7 @@
 		014909E1288E273600502CF3 /* MovieTrailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailer.swift; sourceTree = "<group>"; };
 		014909E8288E5D5D00502CF3 /* WatchNow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchNow.xcdatamodel; sourceTree = "<group>"; };
 		014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
+		0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvertColor.swift"; sourceTree = "<group>"; };
 		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
 		01EC0357289CA7830084E58E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		01EC0359289CAF390084E58E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			children = (
 				394226012889E055008CA328 /* String+CapitalizeFirstLetter.swift */,
 				014547B92898914200608958 /* URL+AppendingQueryParameters.swift */,
+				0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				3942261C288B0452008CA328 /* SearchResultsViewController.swift in Sources */,
 				392A64B4288884EA0030DF06 /* SearchViewController.swift in Sources */,
 				3923BB162898428000013198 /* NetworkErrorManager.swift in Sources */,
+				0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */,
 				01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */,
 				392A649F288872B20030DF06 /* rootTabBarViewController.swift in Sources */,
 				014909DE288DF74800502CF3 /* YoutubeVideo.swift in Sources */,

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "netflix-logo(2).png",
+      "filename" : "WatchNow splash icon.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "WatchNow splash icon-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "WatchNow splash icon-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
