@@ -66,8 +66,8 @@ class SplashscreenViewController: UIViewController {
         NSLayoutConstraint.activate([
             splashLogo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             splashLogo.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            splashLogo.widthAnchor.constraint(lessThanOrEqualToConstant: 512),
-            splashLogo.heightAnchor.constraint(lessThanOrEqualToConstant: 512),
+            splashLogo.widthAnchor.constraint(lessThanOrEqualToConstant: 250),
+            splashLogo.heightAnchor.constraint(lessThanOrEqualToConstant: 250)
         ])
     }
 

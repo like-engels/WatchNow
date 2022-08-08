@@ -15,8 +15,8 @@ class DiscoverViewController: UIViewController {
     private let service = TheMovieDBNetworkAPIManagerImplementation.shared
     
     private let upcomingTable: UITableView = {
-        let table = UITableView()
-        table.register(DiscoverTabTableViewCell.self, forCellReuseIdentifier: DiscoverTabTableViewCell.identifier)
+        let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -69,7 +69,7 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell else { return UITableViewCell() }
         
         cell.configure(with: MovieElement(movieName: movies[indexPath.row].originalName ?? movies[indexPath.row].originalTitle ?? "", posterURL: movies[indexPath.row].posterPath ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].mediaType ?? ""))
         
@@ -77,7 +77,7 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 140
     }
     
     internal func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -102,7 +102,7 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+    internal func tableView(_ tableView: UITableView, contextMenuConfigurationForRowAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let config = UIContextMenuConfiguration(
             identifier: nil,
             previewProvider: nil) { _ in
@@ -112,6 +112,18 @@ extension DiscoverViewController: UITableViewDelegate, UITableViewDataSource {
                 return UIMenu(title: "Movie Options", options: .displayInline, children: [downloadAction])
             }
         return config
+    }
+    
+    internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Discover movies"
+    }
+    
+    internal func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x - 20, y: header.bounds.origin.y, width: 100, height: 100)
+        header.textLabel?.textColor = .label
+        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
     }
     
 }

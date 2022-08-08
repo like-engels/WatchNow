@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class DiscoverTabTableViewCell: UITableViewCell {
+class MovieTableViewCell: UITableViewCell {
 
     static let identifier = "DiscoverTabTableViewCell"
     

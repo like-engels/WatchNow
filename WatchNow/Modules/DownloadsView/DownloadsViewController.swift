@@ -10,8 +10,8 @@ import UIKit
 class DownloadsViewController: UIViewController {
     
     private let downloadsTable: UITableView = {
-        let table = UITableView()
-        table.register(DiscoverTabTableViewCell.self, forCellReuseIdentifier: DiscoverTabTableViewCell.identifier)
+        let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
         return table
     }()
 
@@ -61,7 +61,7 @@ extension DownloadsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell else { return UITableViewCell() }
         
         cell.configure(with: MovieElement(movieName: movies[indexPath.row].originalName ?? movies[indexPath.row].originalTitle ?? "", posterURL: movies[indexPath.row].posterPath ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].media_type ?? ""))
         

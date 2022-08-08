@@ -27,8 +27,8 @@ class AppCoordinator: Coordinator {
     var type: CoordinatorType { .appCoordinator }
     
     func start() {
-        // launchMainScreen()
-        showSplashsreen()
+        launchMainScreen()
+        // showSplashsreen()
     }
     
     func showSplashsreen() {

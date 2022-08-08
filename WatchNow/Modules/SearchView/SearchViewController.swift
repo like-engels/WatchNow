@@ -11,8 +11,8 @@ import Combine
 class SearchViewController: UIViewController {
     
     private let discoverTableView: UITableView = {
-        let table = UITableView()
-        table.register(DiscoverTabTableViewCell.self, forCellReuseIdentifier: DiscoverTabTableViewCell.identifier)
+        let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.register(MovieTableViewCell.self, forCellReuseIdentifier: MovieTableViewCell.identifier)
         table.translatesAutoresizingMaskIntoConstraints = false
         return table
     }()
@@ -76,7 +76,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: DiscoverTabTableViewCell.identifier, for: indexPath) as? DiscoverTabTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MovieTableViewCell.identifier, for: indexPath) as? MovieTableViewCell else { return UITableViewCell() }
         
         cell.configure(with: MovieElement(movieName: movies[indexPath.row].originalName ?? movies[indexPath.row].originalTitle ?? "", posterURL: movies[indexPath.row].posterPath ?? "", movieOverview: movies[indexPath.row].overview ?? "", mediaType: movies[indexPath.row].mediaType ?? ""))
         
@@ -108,6 +108,19 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
+    
+    internal func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        "Popular movies"
+    }
+    
+    internal func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .systemFont(ofSize: 18, weight: .bold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x - 20, y: header.bounds.origin.y, width: 100, height: 100)
+        header.textLabel?.textColor = .label
+        header.textLabel?.text = header.textLabel?.text?.capitalizeFirstLetter()
+    }
+
 }
 
 extension SearchViewController: UISearchResultsUpdating {
