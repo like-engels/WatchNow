@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIManager {
+final class APIManager {
     static let shared = APIManager()
 
     func search(with query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {

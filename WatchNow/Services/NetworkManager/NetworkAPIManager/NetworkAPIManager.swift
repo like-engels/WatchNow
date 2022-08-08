@@ -12,7 +12,7 @@ protocol NetworkAPIManagerBuilder {
     func request(from endpoint: EndpointImplementation) -> AnyPublisher<Movies, NetworkErrorManager>
 }
 
-class TheMovieDBNetworkAPIManagerImplementation: NetworkAPIManagerBuilder {
+final class TheMovieDBNetworkAPIManagerImplementation: NetworkAPIManagerBuilder {
     static let shared = TheMovieDBNetworkAPIManagerImplementation()
 
     func request(from endpoint: EndpointImplementation) -> AnyPublisher<Movies, NetworkErrorManager> {
