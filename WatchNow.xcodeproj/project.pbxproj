@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		013D1FC828A1FE1500F691E5 /* TabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013D1FC728A1FE1500F691E5 /* TabBarCoordinator.swift */; };
+		013D1FCA28A1FF1000F691E5 /* HomepageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013D1FC928A1FF1000F691E5 /* HomepageCoordinator.swift */; };
+		013D1FCC28A1FF2400F691E5 /* DiscoverCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013D1FCB28A1FF2400F691E5 /* DiscoverCoordinator.swift */; };
+		013D1FCE28A1FF3400F691E5 /* DownloadsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013D1FCD28A1FF3400F691E5 /* DownloadsCoordinator.swift */; };
+		013D1FD028A20BD800F691E5 /* SearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013D1FCF28A20BD800F691E5 /* SearchCoordinator.swift */; };
 		014547B828988FE300608958 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014547B728988FE300608958 /* Endpoint.swift */; };
 		014547BA2898914200608958 /* URL+AppendingQueryParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014547B92898914200608958 /* URL+AppendingQueryParameters.swift */; };
 		014909DE288DF74800502CF3 /* YoutubeVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909DD288DF74800502CF3 /* YoutubeVideo.swift */; };
@@ -23,7 +28,6 @@
 		3923BB182898428C00013198 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3923BB172898428C00013198 /* APIManager.swift */; };
 		392A649B288872B20030DF06 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A649A288872B20030DF06 /* AppDelegate.swift */; };
 		392A649D288872B20030DF06 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A649C288872B20030DF06 /* SceneDelegate.swift */; };
-		392A649F288872B20030DF06 /* rootTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A649E288872B20030DF06 /* rootTabBarViewController.swift */; };
 		392A64A4288872B30030DF06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 392A64A3288872B30030DF06 /* Assets.xcassets */; };
 		392A64A7288872B30030DF06 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 392A64A5288872B30030DF06 /* LaunchScreen.storyboard */; };
 		392A64B02888849F0030DF06 /* HomepageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 392A64AF2888849F0030DF06 /* HomepageViewController.swift */; };
@@ -44,6 +48,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		013D1FC728A1FE1500F691E5 /* TabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCoordinator.swift; sourceTree = "<group>"; };
+		013D1FC928A1FF1000F691E5 /* HomepageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageCoordinator.swift; sourceTree = "<group>"; };
+		013D1FCB28A1FF2400F691E5 /* DiscoverCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCoordinator.swift; sourceTree = "<group>"; };
+		013D1FCD28A1FF3400F691E5 /* DownloadsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadsCoordinator.swift; sourceTree = "<group>"; };
+		013D1FCF28A20BD800F691E5 /* SearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCoordinator.swift; sourceTree = "<group>"; };
 		014547B728988FE300608958 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		014547B92898914200608958 /* URL+AppendingQueryParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+AppendingQueryParameters.swift"; sourceTree = "<group>"; };
 		014909DD288DF74800502CF3 /* YoutubeVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeVideo.swift; sourceTree = "<group>"; };
@@ -61,7 +70,6 @@
 		392A6497288872B20030DF06 /* WatchNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WatchNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		392A649A288872B20030DF06 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		392A649C288872B20030DF06 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		392A649E288872B20030DF06 /* rootTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rootTabBarViewController.swift; sourceTree = "<group>"; };
 		392A64A3288872B30030DF06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		392A64A6288872B30030DF06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		392A64A8288872B30030DF06 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -176,7 +184,7 @@
 				01EC0359289CAF390084E58E /* AppCoordinator.swift */,
 				392A649A288872B20030DF06 /* AppDelegate.swift */,
 				392A649C288872B20030DF06 /* SceneDelegate.swift */,
-				392A649E288872B20030DF06 /* rootTabBarViewController.swift */,
+				013D1FC728A1FE1500F691E5 /* TabBarCoordinator.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -185,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				392A64AF2888849F0030DF06 /* HomepageViewController.swift */,
+				013D1FC928A1FF1000F691E5 /* HomepageCoordinator.swift */,
 			);
 			path = HomepageView;
 			sourceTree = "<group>";
@@ -193,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				392A64B1288884B40030DF06 /* DiscoverViewController.swift */,
+				013D1FCB28A1FF2400F691E5 /* DiscoverCoordinator.swift */,
 			);
 			path = DiscoverView;
 			sourceTree = "<group>";
@@ -202,6 +212,7 @@
 			children = (
 				392A64B3288884EA0030DF06 /* SearchViewController.swift */,
 				3942261B288B0452008CA328 /* SearchResultsViewController.swift */,
+				013D1FCF28A20BD800F691E5 /* SearchCoordinator.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -210,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				392A64B52888850C0030DF06 /* DownloadsViewController.swift */,
+				013D1FCD28A1FF3400F691E5 /* DownloadsCoordinator.swift */,
 			);
 			path = DownloadsView;
 			sourceTree = "<group>";
@@ -381,7 +393,7 @@
 				3923BB162898428000013198 /* NetworkErrorManager.swift in Sources */,
 				0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */,
 				01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */,
-				392A649F288872B20030DF06 /* rootTabBarViewController.swift in Sources */,
+				013D1FC828A1FE1500F691E5 /* TabBarCoordinator.swift in Sources */,
 				014909DE288DF74800502CF3 /* YoutubeVideo.swift in Sources */,
 				39422615288A15C9008CA328 /* MovieTableViewCell.swift in Sources */,
 				014547BA2898914200608958 /* URL+AppendingQueryParameters.swift in Sources */,
@@ -395,12 +407,16 @@
 				014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */,
 				392A64B62888850C0030DF06 /* DownloadsViewController.swift in Sources */,
 				394226022889E055008CA328 /* String+CapitalizeFirstLetter.swift in Sources */,
+				013D1FCC28A1FF2400F691E5 /* DiscoverCoordinator.swift in Sources */,
 				3923BB182898428C00013198 /* APIManager.swift in Sources */,
 				392A649B288872B20030DF06 /* AppDelegate.swift in Sources */,
+				013D1FCA28A1FF1000F691E5 /* HomepageCoordinator.swift in Sources */,
 				392A649D288872B20030DF06 /* SceneDelegate.swift in Sources */,
+				013D1FCE28A1FF3400F691E5 /* DownloadsCoordinator.swift in Sources */,
 				3942260E2889F22D008CA328 /* MovieCollectionViewCell.swift in Sources */,
 				392A64B2288884B40030DF06 /* DiscoverViewController.swift in Sources */,
 				014547B828988FE300608958 /* Endpoint.swift in Sources */,
+				013D1FD028A20BD800F691E5 /* SearchCoordinator.swift in Sources */,
 				392A64B02888849F0030DF06 /* HomepageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

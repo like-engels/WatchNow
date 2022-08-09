@@ -11,12 +11,10 @@ enum SplashscreenState {
     case loading
     case success
     case failure
-    case unknown
+
 }
 
-class AppCoordinator: Coordinator {
-    
-    @Published var statusIndicator: String = "Loading"
+class AppCoordinator: NSObject, NavigationCoordinator {
 
     var navigationController: UINavigationController?
     
@@ -26,20 +24,33 @@ class AppCoordinator: Coordinator {
     
     var type: CoordinatorType { .appCoordinator }
     
+    var state: SplashscreenState = .success
+    
     func start() {
-        launchMainScreen()
-        // showSplashsreen()
+        switch state {
+        case .loading:
+            splashscreenState()
+        case .success:
+            successState()
+        case .failure:
+            failureState()
+            
+        }
     }
     
-    func showSplashsreen() {
+    func splashscreenState() {
         let splashscreenViewController = SplashscreenViewController()
         navigationController?.pushViewController(splashscreenViewController, animated: false)
     }
     
-    func launchMainScreen() {
-        let mainViewController = rootTabBarViewController()
-        navigationController?.pushViewController(mainViewController, animated: false)
+    func successState() {
+        let tabBarCoordinator = TabBarCoordinator()
+        tabBarCoordinator.start()
+        children.append(tabBarCoordinator)
+        navigationController?.pushViewController(tabBarCoordinator.tabBarController, animated: false)
     }
+    
+    func failureState() {}
     
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController

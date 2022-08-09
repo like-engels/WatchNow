@@ -9,13 +9,12 @@ import UIKit
 
 enum CoordinatorType {
     case appCoordinator
-    case tabCoordinator
-    case commonCoordinator
+    case tabBarCoordinator
+    case navigationCoordinator
+    case simpleCoordinator
 }
 
-protocol Coordinator: AnyObject {
-    var navigationController: UINavigationController? { get set }
-
+protocol Coordinator: NSObject {
     var finishDelegate: CoordinatorFinishDelegate? { get set }
 
     var children: [Coordinator] { get set }
@@ -33,6 +32,14 @@ extension Coordinator {
         children.removeAll()
         finishDelegate?.coordinatorDidFinish(childCoordinator: self)
     }
+}
+
+protocol NavigationCoordinator: Coordinator {
+    var navigationController: UINavigationController? { get set }
+}
+
+protocol TabBarNavigationCoordinator: Coordinator {
+    var tabBarController: UITabBarController { get set }
 }
 
 protocol CoordinatorFinishDelegate: AnyObject {

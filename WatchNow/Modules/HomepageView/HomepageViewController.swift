@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-enum Sections: Int {
+enum Sections: Int, CaseIterable {
     case TrendingMovies = 0
     case TrendingTV = 1
     case Popular = 2
@@ -20,10 +20,10 @@ class HomepageViewController: UIViewController {
     
     private let sectionTitles = [
         "Trending Movies",
-        "Popular",
         "Trending TV",
-        "Top rated",
-        "Upcoming Movies"
+        "Popular",
+        "Upcoming Movies",
+        "Top Rated"
     ]
     
     private let homeFeedTable: UITableView = {
