@@ -8,15 +8,15 @@
 import Foundation
 
 struct TrailerVideo: Codable {
-    let items: [YoutubeVideo]
+    var items: [YoutubeVideo]
 }
 
 struct YoutubeVideo: Codable {
-    let id: YoutubeVideoIdentifier
+    var id: YoutubeVideoIdentifier
     
 }
 
 struct YoutubeVideoIdentifier: Codable {
-    let kind: String
-    let videoId: String
+    var kind: String
+    var videoId: String
 }

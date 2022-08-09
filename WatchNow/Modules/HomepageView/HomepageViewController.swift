@@ -16,7 +16,7 @@ enum Sections: Int, CaseIterable {
     case TopRated = 4
 }
 
-class HomepageViewController: UIViewController {
+final class HomepageViewController: UIViewController {
     
     private let sectionTitles = [
         "Trending Movies",
@@ -33,6 +33,7 @@ class HomepageViewController: UIViewController {
     }()
 
     private var randomSelectedBanner: Movie?
+    private var sectionsContent = [Sections.RawValue: [Movie]]()
     private var headerView: HeroHeaderView?
     private var cancellables = Set<AnyCancellable>()
     private var service = TheMovieDBNetworkAPIManagerImplementation.shared
@@ -58,21 +59,28 @@ class HomepageViewController: UIViewController {
         
     }
     
+    convenience init(randomMovieForBanner: Movie, sectionContents: [Sections.RawValue: [Movie]]) {
+        self.init()
+        self.randomSelectedBanner = randomMovieForBanner
+        self.sectionsContent = sectionContents
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         homeFeedTable.frame = view.bounds
     }
     
     private func configureHeroHeader() {
-        let cancellable = self.service
-            .request(from: .getTrendingMovies)
-            .sink { (res) in
-            } receiveValue: { res in
-                self.randomSelectedBanner = res.movies.randomElement()
-                guard let selectedBanner = self.randomSelectedBanner else { return }
-                self.headerView?.configure(with: selectedBanner)
-            }
-        self.cancellables.insert(cancellable)
+//        let cancellable = self.service
+//            .request(from: .getTrendingMovies)
+//            .sink { (res) in
+//            } receiveValue: { res in
+//                self.randomSelectedBanner = res.movies.randomElement()
+//                guard let selectedBanner = self.randomSelectedBanner else { return }
+//                self.headerView?.configure(with: selectedBanner)
+//            }
+//        self.cancellables.insert(cancellable)
+        headerView?.configure(with: randomSelectedBanner!)
     }
     
     private func configureNavbar() {
@@ -98,42 +106,47 @@ extension HomepageViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.identifier, for: indexPath) as? CollectionViewTableViewCell else { return UITableViewCell() }
         
         cell.delegate = self
-        lazy var requestType: EndpointImplementation = .getTrendingMovies
+//        lazy var requestType: EndpointImplementation = .getTrendingMovies
 
         switch indexPath.section {
         case Sections.TrendingMovies.rawValue:
-            configureCell()
+            cell.configure(with: sectionsContent[Sections.TrendingMovies.rawValue]!)
+//            configureCell()
 
         case Sections.TrendingTV.rawValue:
-            requestType = .getTrendingSeries
-            configureCell()
+            cell.configure(with: sectionsContent[Sections.TrendingTV.rawValue]!)
+//            requestType = .getTrendingSeries
+//            configureCell()
 
         case Sections.Popular.rawValue:
-            requestType = .getPopularMovies
-            configureCell()
+            cell.configure(with: sectionsContent[Sections.Popular.rawValue]!)
+//            requestType = .getPopularMovies
+//            configureCell()
 
         case Sections.Upcoming.rawValue:
-            requestType = .getUpcomingMovies
-            configureCell()
+            cell.configure(with: sectionsContent[Sections.Upcoming.rawValue]!)
+//            requestType = .getUpcomingMovies
+//            configureCell()
 
         case Sections.TopRated.rawValue:
-            requestType = .getTopRatedMovies
-            configureCell()
+            cell.configure(with: sectionsContent[Sections.TopRated.rawValue]!)
+//            requestType = .getTopRatedMovies
+//            configureCell()
 
         default:
             return UITableViewCell()
         }
         
-        func configureCell() {
-            lazy var cancellable = self.service
-                .request(from: requestType)
-                .receive(on: DispatchQueue.main)
-                .sink { res in
-                } receiveValue: { movie in
-                    cell.configure(with: movie.movies)
-                }
-            self.cancellables.insert(cancellable)
-        }
+//        func configureCell() {
+//            lazy var cancellable = self.service
+//                .request(from: requestType)
+//                .receive(on: DispatchQueue.main)
+//                .sink { res in
+//                } receiveValue: { movie in
+//                    cell.configure(with: movie.movies)
+//                }
+//            self.cancellables.insert(cancellable)
+//        }
         
         return cell
     }
