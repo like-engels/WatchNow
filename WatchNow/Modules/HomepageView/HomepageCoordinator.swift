@@ -21,14 +21,7 @@ final class HomepageCoordinator : NSObject, Coordinator {
     private var requestType: EndpointImplementation = .getTrendingMovies
     private var sectionsContent = [Sections.RawValue: [Movie]]()
     
-    func start(coordinator: TabBarCoordinator, completion: @escaping (_ state: SplashscreenState) -> Void) {
-//        getRandomMovie { result in
-//            if result {
-//                completion(.success)
-//            } else {
-//                completion(.failure)
-//            }
-//        }
+    func start(completion: @escaping (_ state: SplashscreenState) -> Void) {
         setUI { result in
             if result {
                 completion(.success)
@@ -36,23 +29,15 @@ final class HomepageCoordinator : NSObject, Coordinator {
                 completion(.failure)
             }
         }
-//        setUI()
-
     }
     
     func start() {
-//        setUI()
     }
     
     func startUI() {
         let homeVC = HomepageViewController(randomMovieForBanner: randomSelectedMovieForHeaderBanner!, sectionContents: sectionsContent)
         viewController = homeVC
     }
-    
-//    private func setViewController() {
-//        getRandomMovie()
-//        getSections()
-//    }
     
     func setUI(completion: @escaping (_ result: Bool) -> Void) {
         getRandomMovie { result in
@@ -65,7 +50,6 @@ final class HomepageCoordinator : NSObject, Coordinator {
                 completion(false)
             }
         }
-       
 
     }
     
@@ -122,9 +106,6 @@ final class HomepageCoordinator : NSObject, Coordinator {
                 switch res {
                 case .finished:
                     if self.sectionsContent.count == Sections.allCases.count {
-                        for (sectionName, sectionValue) in self.sectionsContent {
-                            print("\(sectionName): \(sectionValue)")
-                        }
                         completion(true)
                     }
                 case .failure(let error):

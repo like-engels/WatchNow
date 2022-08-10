@@ -35,38 +35,34 @@ final class TabBarCoordinator: NSObject, TabBarNavigationCoordinator, UITabBarCo
     var state: SplashscreenState = .loading
 
     func start() {
-
-        // NOTE: Adding all subcoordinators to the children array
-        // children.append(homeCoordinator)
-//        children.append(discoverCoordinator)
-//        children.append(downloadsCoordinator)
-//        children.append(downloadsCoordinator)
-
-        // setUI()
-        
-        // NOTE: Starting all coordinators
-       // homeCoordinator.start()
-        
         switch state {
         case .loading:
             tabBarController.tabBar.isHidden = true
             tabBarController.viewControllers = [SplashscreenViewController()]
-            homeCoordinator.start(coordinator: self) { result in
-                self.state = result
+            homeCoordinator.start() { state in
+                self.state = state
                 
                 if self.state == .success {
                     self.homeCoordinator.startUI()
                     self.start()
                 }
-                
             }
             children.append(homeCoordinator)
             
-            
-            
+//            discoverCoordinator.start { state in
+//                self.state = state
+//
+//                if self.state == .success {
+//                    self.discoverCoordinator.startUI()
+//                    self.start()
+//                }
+//            }
+//            children.append(discoverCoordinator)
+
         case .failure:
             print("C murio")
         case .success:
+            tabBarController.tabBar.isHidden = false
             self.setUI()
         }
 
@@ -86,8 +82,8 @@ final class TabBarCoordinator: NSObject, TabBarNavigationCoordinator, UITabBarCo
         let homeViewController = UINavigationController(rootViewController: homeCoordinator.viewController!)
         homeViewController.tabBarItem = UITabBarItem(title: "Homepage", image: UIImage(systemName: "house"), tag: 0)
 
-//        let discoverViewController = UINavigationController(rootViewController: discoverCoordinator.viewController)
-//        discoverViewController.tabBarItem = UITabBarItem(title: "Discover", image: UIImage(systemName: "play.circle"), tag: 1)
+      //  let discoverViewController = UINavigationController(rootViewController: discoverCoordinator.viewController!)
+      //  discoverViewController.tabBarItem = UITabBarItem(title: "Discover", image: UIImage(systemName: "play.circle"), tag: 1)
 //
 //        let searchViewController = UINavigationController(rootViewController: searchCoordinator.viewController)
 //        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: UIImage(systemName: "magnifyingglass"), tag: 2)
@@ -97,7 +93,7 @@ final class TabBarCoordinator: NSObject, TabBarNavigationCoordinator, UITabBarCo
         
         // NOTE: Adding all viewControllers to the controllers array
         controllers.append(homeViewController)
-//        controllers.append(discoverViewController)
+     //   controllers.append(discoverViewController)
 //        controllers.append(searchViewController)
 //        controllers.append(downloadsViewController)
         

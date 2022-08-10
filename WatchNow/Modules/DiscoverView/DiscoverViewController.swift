@@ -11,8 +11,6 @@ import Combine
 class DiscoverViewController: UIViewController {
     
     private var movies = [Movie]()
-    private var cancellables = Set<AnyCancellable>()
-    private let service = TheMovieDBNetworkAPIManagerImplementation.shared
     
     private let upcomingTable: UITableView = {
         let table = UITableView(frame: .zero, style: .insetGrouped)
@@ -31,32 +29,20 @@ class DiscoverViewController: UIViewController {
 
         upcomingTable.delegate = self
         upcomingTable.dataSource = self
-
-        fetchUpcoming()
+        upcomingTable.reloadData()
         
         view.addSubview(upcomingTable)
+    }
+    
+    convenience init(movies: [Movie]) {
+        self.init()
+        self.movies = movies
+
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         upcomingTable.frame = view.bounds
-    }
-    
-    private func fetchUpcoming() {
-        lazy var cancellable = self.service
-            .request(from: .getDiscoverFeed)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] (res) in
-                switch (res) {
-                case .finished:
-                    self?.upcomingTable.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            } receiveValue: { [weak self] res in
-                self?.movies = res.movies
-            }
-        self.cancellables.insert(cancellable)
     }
     
 }
