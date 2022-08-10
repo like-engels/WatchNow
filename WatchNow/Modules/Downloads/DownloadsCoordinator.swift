@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class DownloadsCoordinator : NSObject, Coordinator {
+final class DownloadsCoordinator : NSObject, WorkflowCoordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var children: [Coordinator] = []
     var type: CoordinatorType { .simpleCoordinator }
@@ -20,12 +20,12 @@ final class DownloadsCoordinator : NSObject, Coordinator {
         
     }
     
-    func start(completion: @escaping (_ state: SplashscreenState) -> Void) {
+    func start(completion: @escaping (_ state: StateCompletion) -> Void) {
         setUI { result in
             if result {
                 completion(.success)
             } else {
-                completion(.failure)
+                completion(.error(.failed))
             }
         }
     }
@@ -54,7 +54,6 @@ final class DownloadsCoordinator : NSObject, Coordinator {
             case .success(let movies):
                 self.movies = movies
                 completion(true)
-               // self.downloadsTable.reloadData()
                 
             case .failure(let error):
                 print(error.localizedDescription)

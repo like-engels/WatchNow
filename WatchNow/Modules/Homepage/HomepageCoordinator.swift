@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class HomepageCoordinator : NSObject, Coordinator {
+final class HomepageCoordinator : NSObject, WorkflowCoordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var children: [Coordinator] = []
     var type: CoordinatorType { .simpleCoordinator }
@@ -21,12 +21,12 @@ final class HomepageCoordinator : NSObject, Coordinator {
     private var requestType: EndpointImplementation = .getTrendingMovies
     private var sectionsContent = [Sections.RawValue: [Movie]]()
     
-    func start(completion: @escaping (_ state: SplashscreenState) -> Void) {
+    func start(completion: @escaping (_ state: StateCompletion) -> Void) {
         setUI { result in
             if result {
                 completion(.success)
             } else {
-                completion(.failure)
+                completion(.error(.failed))
             }
         }
     }

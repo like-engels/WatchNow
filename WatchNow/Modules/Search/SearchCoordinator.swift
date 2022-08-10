@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class SearchCoordinator: NSObject, Coordinator {
+final class SearchCoordinator: NSObject, WorkflowCoordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var children: [Coordinator] = []
     var type: CoordinatorType { .simpleCoordinator }
@@ -23,12 +23,12 @@ final class SearchCoordinator: NSObject, Coordinator {
         
     }
 
-    func start(completion: @escaping (_ state: SplashscreenState) -> Void) {
+    func start(completion: @escaping (_ state: StateCompletion) -> Void) {
         setUI { result in
             if result {
                 completion(.success)
             } else {
-                completion(.failure)
+                completion(.error(.failed))
             }
         }
     }
@@ -57,8 +57,6 @@ final class SearchCoordinator: NSObject, Coordinator {
             .sink { res in
                 switch res {
                 case .finished:
-                    // self?.discoverTableView.reloadData()
-                    print("Booga dooga")
                     completion(true)
                 case .failure(let error):
                     print(error.localizedDescription)

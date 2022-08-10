@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-final class DiscoverCoordinator : NSObject, Coordinator {
+final class DiscoverCoordinator : NSObject, WorkflowCoordinator {
     var finishDelegate: CoordinatorFinishDelegate?
     var children: [Coordinator] = []
     var type: CoordinatorType { .simpleCoordinator }
@@ -23,12 +23,12 @@ final class DiscoverCoordinator : NSObject, Coordinator {
         
     }
     
-    func start(completion: @escaping (_ state: SplashscreenState) -> Void) {
+    func start(completion: @escaping (_ state: StateCompletion) -> Void) {
         setUI { result in
             if result {
                 completion(.success)
             } else {
-                completion(.failure)
+                completion(.error(.failed))
             }
         }
     }
@@ -57,7 +57,6 @@ final class DiscoverCoordinator : NSObject, Coordinator {
             .sink { res in
                 switch res {
                 case .finished:
-                    print(self.movies.count)
                     completion(true)
                 case .failure(let error):
                     completion(false)
