@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 class SearchViewController: UIViewController {
     
@@ -25,8 +24,6 @@ class SearchViewController: UIViewController {
     }()
     
     private var movies = [Movie]()
-    private var cancellables = Set<AnyCancellable>()
-    private var service = TheMovieDBNetworkAPIManagerImplementation.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +37,8 @@ class SearchViewController: UIViewController {
 
         discoverTableView.delegate = self
         discoverTableView.dataSource = self
+        discoverTableView.reloadData()
         searchController.searchResultsUpdater = self
-
-        fetchDiscoverMovies()
 
         view.addSubview(discoverTableView)
     }
@@ -52,21 +48,9 @@ class SearchViewController: UIViewController {
         discoverTableView.frame = view.bounds
     }
     
-    private func fetchDiscoverMovies() {
-        lazy var cancellable = self.service
-            .request(from: .getTopRatedMovies)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] (res) in
-                switch (res) {
-                case .finished:
-                    self?.discoverTableView.reloadData()
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            } receiveValue: { [weak self] res in
-                self?.movies = res.movies
-            }
-        self.cancellables.insert(cancellable)
+    convenience init(movies: [Movie]) {
+        self.init()
+        self.movies = movies
     }
 }
 

@@ -15,7 +15,7 @@ class DownloadsViewController: UIViewController {
         return table
     }()
 
-    private var movies: [MovieItem] = [MovieItem]()
+    private var movies = [MovieItem]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,29 +28,22 @@ class DownloadsViewController: UIViewController {
         
         downloadsTable.delegate = self
         downloadsTable.dataSource = self
+        downloadsTable.reloadData()
         
-        fetchLocalStorageForDownload()
-        NotificationCenter.default.addObserver(forName: NSNotification.Name("downloaded"), object: nil, queue: nil) { _ in
-            self.fetchLocalStorageForDownload()
-        }
+     //   fetchLocalStorageForDownload()
+//        NotificationCenter.default.addObserver(forName: NSNotification.Name("downloaded"), object: nil, queue: nil) { _ in
+//            self.fetchLocalStorageForDownload()
+//        }
+    }
+    
+    convenience init(movies: [MovieItem]) {
+        self.init()
+        self.movies = movies
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         downloadsTable.frame = view.bounds
-    }
-    
-    private func fetchLocalStorageForDownload() {
-        DataPersistenceManager.shared.fetchingMoviesFromCoreData { [weak self] result in
-            switch result {
-            case .success(let movies):
-                self?.movies = movies
-                self?.downloadsTable.reloadData()
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
     }
 
 }
