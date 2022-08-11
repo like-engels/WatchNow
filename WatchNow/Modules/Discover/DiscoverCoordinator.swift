@@ -33,11 +33,6 @@ final class DiscoverCoordinator : NSObject, WorkflowCoordinator {
         }
     }
     
-    func startUI() {
-        let discoverVC = DiscoverViewController(movies: self.movies)
-        viewController = discoverVC
-    }
-    
     private func setUI(completion: @escaping (_ result: Bool) -> Void) {
         fetchUpcoming { result in
             if result {

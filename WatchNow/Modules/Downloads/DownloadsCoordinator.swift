@@ -30,11 +30,6 @@ final class DownloadsCoordinator : NSObject, WorkflowCoordinator {
         }
     }
     
-    func startUI() {
-        let downloadsVC = DownloadsViewController(movies: self.movies)
-        viewController = downloadsVC
-    }
-    
     private func setUI(completion: @escaping (Bool) -> Void) {
         fetchLocalStorageForDownload { result in
             if result {

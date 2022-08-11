@@ -20,37 +20,42 @@ enum StateError {
     case unknown
 }
 
-protocol StateManager: NSObject {
+protocol StateManager: AnyObject {
+    var coordinator: WorkflowCoordinator? { get set }
     var coordinators: [WorkflowCoordinator] { get set }
+    var sinkedCoordinators: [WorkflowCoordinator] { get set }
     
-    var coordinatorCounter: Int { get set }
+    func sink(coordinator: WorkflowCoordinator, completion: @escaping (StateCompletion) -> Void, sinked: @escaping (WorkflowCoordinator) -> Void)
     
-    func start(coordinators: [WorkflowCoordinator], sink: @escaping ([WorkflowCoordinator]) -> Void, completion: @escaping (StateCompletion) -> Void)
-    
-    func add(coordinator: [WorkflowCoordinator])
+    func append(coordinator: WorkflowCoordinator)
     
     func free()
-    
+
 }
 
 extension StateManager {
-    func add(coordinator: [WorkflowCoordinator]) {
-        self.coordinators.append(contentsOf: coordinator)
+    func sink(coordinator: WorkflowCoordinator, completion: @escaping (StateCompletion) -> Void, sinked: @escaping (WorkflowCoordinator) -> Void) {
+        coordinator.start { state in
+            switch state {
+            case .loading:
+                print("is loading")
+            case .error(let stateError):
+                print(stateError)
+            case .success:
+                self.sinkedCoordinators.append(coordinator)
+                completion(.success)
+                sinked(coordinator)
+            }
+        }
+    }
+    
+    func append(coordinator: WorkflowCoordinator) {
+        self.coordinators.append(coordinator)
     }
     
     func free() {
         self.coordinators.removeAll()
+        self.sinkedCoordinators.removeAll()
+        self.coordinator = nil
     }
-    
-    func sink(coordinators: @escaping ([WorkflowCoordinator]) -> Void , completion: @escaping (StateCompletion) -> Void) {
-        if self.coordinators.isEmpty {
-            completion(.error(.emptyCoordinators))
-        }
-        
-        if self.coordinatorCounter == self.coordinators.count {
-            coordinators(self.coordinators)
-            completion(.success)
-        }
-    }
-
 }

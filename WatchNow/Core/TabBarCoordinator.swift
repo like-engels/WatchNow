@@ -9,11 +9,11 @@ import UIKit
 
 final class TabBarCoordinator: NSObject, TabBarNavigationCoordinator, UITabBarControllerDelegate {
     // NOTE: All coordinators instances
-    let homeCoordinator = HomepageCoordinator()
-    let discoverCoordinator = DiscoverCoordinator()
-    let searchCoordinator = SearchCoordinator()
-    let downloadsCoordinator = DownloadsCoordinator()
-    let stateManager = StateManagerImplementation()
+    var homeCoordinator = HomepageCoordinator()
+    var discoverCoordinator = DiscoverCoordinator()
+    var searchCoordinator = SearchCoordinator()
+    var downloadsCoordinator = DownloadsCoordinator()
+    var stateManager = StateManagerImpl()
 
     // NOTE: Protocol-related stuff
     var tabBarController: UITabBarController
@@ -27,16 +27,13 @@ final class TabBarCoordinator: NSObject, TabBarNavigationCoordinator, UITabBarCo
         case .loading:
             tabBarController.tabBar.isHidden = true
             tabBarController.viewControllers = [SplashscreenViewController()]
+            
             if case .success = self.stateManagerStatus {
                 self.setUI()
+                self.stateManager.free()
             }
 
-            stateManager.start(coordinators: [homeCoordinator, discoverCoordinator, searchCoordinator, downloadsCoordinator]) { sinkedCoordinators in
-                self.children = sinkedCoordinators
-                self.start()
-            } completion: { state in
-                self.stateManagerStatus = state
-            }
+            prepareHomeCoordinator()
 
         case .error(.someCoordinatorFailed):
             print("C murio")
@@ -44,19 +41,87 @@ final class TabBarCoordinator: NSObject, TabBarNavigationCoordinator, UITabBarCo
             tabBarController.tabBar.isHidden = false
             self.setUI()
         case .error(.emptyCoordinators):
-            print("")
+            print("empty coordinator")
         case .error(.failed):
-            print("")
+            print("something went wrong")
         case .error(.unknown):
-            print("")
+            print("unknown error")
         }
-
+        
     }
     
     override init() {
         tabBarController = UITabBarController()
         super.init()
         start()
+
+    }
+    
+    private func prepareHomeCoordinator() {
+        stateManager.sink(coordinator: homeCoordinator) { completion in
+            switch completion {
+            case .loading:
+                print("loading coordinator")
+            case .error(let error):
+                print(error)
+            case .success:
+                self.stateManagerStatus = completion
+                self.prepareDiscoverCoordinator()
+            }
+        } sinked: { coordinator in
+            self.homeCoordinator = coordinator as! HomepageCoordinator
+        }
+    }
+    
+    private func prepareDiscoverCoordinator() {
+        stateManager.sink(coordinator: discoverCoordinator) { completion in
+            switch completion {
+            case .loading:
+                print("loading coordinator")
+            case .error(let error):
+                print(error)
+            case .success:
+                self.stateManagerStatus = completion
+                self.prepareSearchCoordinator()
+            }
+        } sinked: { coordinator in
+            self.discoverCoordinator = coordinator as! DiscoverCoordinator
+        }
+
+    }
+    
+    private func prepareSearchCoordinator() {
+        stateManager.sink(coordinator: searchCoordinator) { completion in
+            switch completion {
+            case .loading:
+                print("loading coordinator")
+            case .error(let error):
+                print(error)
+            case .success:
+                self.stateManagerStatus = completion
+                self.prepareDownloadsCoordinator()
+            }
+        } sinked: { coordinator in
+            self.searchCoordinator = coordinator as! SearchCoordinator
+        }
+        
+    }
+    
+    private func prepareDownloadsCoordinator() {
+        stateManager.sink(coordinator: downloadsCoordinator) { completion in
+            switch completion {
+            case .loading:
+                print("loading coordinator")
+            case .error(let error):
+                print(error)
+            case .success:
+                self.stateManagerStatus = completion
+                self.stateManager.free()
+                self.start()
+            }
+        } sinked: { coordinator in
+            self.downloadsCoordinator = coordinator as! DownloadsCoordinator
+        }
 
     }
     

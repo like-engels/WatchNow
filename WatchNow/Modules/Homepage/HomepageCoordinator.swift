@@ -34,11 +34,6 @@ final class HomepageCoordinator : NSObject, WorkflowCoordinator {
     func start() {
     }
     
-    func startUI() {
-        let homeVC = HomepageViewController(randomMovieForBanner: randomSelectedMovieForHeaderBanner!, sectionContents: sectionsContent)
-        viewController = homeVC
-    }
-    
     func setUI(completion: @escaping (_ result: Bool) -> Void) {
         getRandomMovie { result in
             if result {

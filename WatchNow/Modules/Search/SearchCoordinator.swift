@@ -33,11 +33,6 @@ final class SearchCoordinator: NSObject, WorkflowCoordinator {
         }
     }
 
-    func startUI() {
-        let searchVC = SearchViewController(movies: self.movies)
-        viewController = searchVC
-    }
-
     private func setUI(completion: @escaping (Bool) -> Void) {
         fetchDiscoverMovies { state in
             if state {
