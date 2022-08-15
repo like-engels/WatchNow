@@ -7,7 +7,7 @@
 
 import Foundation
 
-class APIManager {
+final class APIManager {
     static let shared = APIManager()
 
     func search(with query: String, completion: @escaping (Result<[Movie], Error>) -> Void) {
@@ -32,9 +32,18 @@ class APIManager {
     
     func getMovie(with query: String, completion: @escaping (Result<YoutubeVideo, Error>) -> Void) {
         
+        var key: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Secrets", ofType: "plist") {
+            key = NSDictionary(contentsOfFile: path)
+        }
+        
+        lazy var dict = key
+
+        let apiKey = dict!["YoutubeAPIKey"] as! String
+        
         guard let query = query.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         
-        guard let url = URL(string: "https://youtube.googleapis.com/youtube/v3/search?q=\(query)&key=AIzaSyDGELlBDLQxZC7gio-GFJuNqo_DTIKgQTc") else { return }
+        guard let url = URL(string: "https://youtube.googleapis.com/youtube/v3/search?q=\(query)&key=\(apiKey)") else { return }
         
         let task = URLSession.shared.dataTask(with: URLRequest(url: url)) { data, _, error in
             guard let data = data, error == nil else {

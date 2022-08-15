@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class DataPersistenceManager {
+final class DataPersistenceManager {
     
     enum CoreDataError: Error {
         case failedToSaveData
