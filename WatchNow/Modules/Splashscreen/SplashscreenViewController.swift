@@ -11,7 +11,7 @@ class SplashscreenViewController: UIViewController {
     
     private let label: UILabel = {
         var label = UILabel()
-        label.text = "Sinking movies, getting all things done..."
+        label.text = "Loading WatchNow, getting all things done..."
         label.textColor = .white
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

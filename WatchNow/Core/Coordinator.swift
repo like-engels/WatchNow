@@ -34,6 +34,10 @@ extension Coordinator {
     }
 }
 
+protocol WorkflowCoordinator: Coordinator {
+    func start(completion: @escaping (_ state: StateCompletion) -> Void)
+}
+
 protocol NavigationCoordinator: Coordinator {
     var navigationController: UINavigationController? { get set }
 }
