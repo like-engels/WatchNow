@@ -21,6 +21,7 @@
 		014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */; };
 		0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */; };
 		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
+		01BC544529B44ADC00AD963F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC544429B44ADC00AD963F /* SplashViewController.swift */; };
 		01EC0358289CA7830084E58E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0357289CA7830084E58E /* Coordinator.swift */; };
 		01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0359289CAF390084E58E /* AppCoordinator.swift */; };
 		01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */; };
@@ -64,6 +65,7 @@
 		014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvertColor.swift"; sourceTree = "<group>"; };
 		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
+		01BC544429B44ADC00AD963F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		01EC0357289CA7830084E58E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		01EC0359289CAF390084E58E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashscreenViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +114,67 @@
 				0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */,
 			);
 			path = NetworkAPIManager;
+			sourceTree = "<group>";
+		};
+		01BC543B29B4481300AD963F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		01BC543C29B4481900AD963F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				01BC544229B4486C00AD963F /* Bindings */,
+				01BC544129B4486600AD963F /* View */,
+				01BC544029B4485F00AD963F /* ViewModel */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		01BC543D29B4482000AD963F /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		01BC543E29B4484900AD963F /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		01BC544029B4485F00AD963F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		01BC544129B4486600AD963F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				01BC544329B44ABB00AD963F /* Splashscreen */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		01BC544229B4486C00AD963F /* Bindings */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Bindings;
+			sourceTree = "<group>";
+		};
+		01BC544329B44ABB00AD963F /* Splashscreen */ = {
+			isa = PBXGroup;
+			children = (
+				01BC544429B44ADC00AD963F /* SplashViewController.swift */,
+			);
+			path = Splashscreen;
 			sourceTree = "<group>";
 		};
 		01EC035D289CBD7A0084E58E /* Splashscreen */ = {
@@ -258,6 +321,10 @@
 		392A6499288872B20030DF06 /* WatchNow */ = {
 			isa = PBXGroup;
 			children = (
+				01BC543E29B4484900AD963F /* Service */,
+				01BC543D29B4482000AD963F /* Tools */,
+				01BC543C29B4481900AD963F /* Presentation */,
+				01BC543B29B4481300AD963F /* Domain */,
 				398DC59E289EBF5A00ACAA68 /* WatchNow.entitlements */,
 				3923BB0F28983DE300013198 /* Core */,
 				3923BB0B28983DA800013198 /* Modules */,
@@ -417,6 +484,7 @@
 				014909E0288E215E00502CF3 /* MoviePreviewViewController.swift in Sources */,
 				392A64BD288890AA0030DF06 /* CollectionViewTableViewCell.swift in Sources */,
 				014909E2288E273600502CF3 /* MovieTrailer.swift in Sources */,
+				01BC544529B44ADC00AD963F /* SplashViewController.swift in Sources */,
 				01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */,
 				392A64BF2888B20E0030DF06 /* HeroHeaderView.swift in Sources */,
 				39422618288AE016008CA328 /* MovieElement.swift in Sources */,
@@ -576,7 +644,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2U4B9CUD5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WatchNow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -606,7 +674,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 2U4B9CUD5A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WatchNow/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
