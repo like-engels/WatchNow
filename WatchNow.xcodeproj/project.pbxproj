@@ -24,6 +24,7 @@
 		0174E6E929B973E500A04D41 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E829B973E500A04D41 /* HttpResponse.swift */; };
 		0174E6EC29B974CD00A04D41 /* coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0174E6EB29B974CD00A04D41 /* coconut.png */; };
 		0174E6EE29B974E900A04D41 /* coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0174E6ED29B974E900A04D41 /* coconut.png */; };
+		0174E6F029B9753F00A04D41 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6EF29B9753F00A04D41 /* Failure.swift */; };
 		0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */; };
 		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
 		01BC544529B44ADC00AD963F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC544429B44ADC00AD963F /* SplashViewController.swift */; };
@@ -76,6 +77,7 @@
 		0174E6E829B973E500A04D41 /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
 		0174E6EB29B974CD00A04D41 /* coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coconut.png; sourceTree = "<group>"; };
 		0174E6ED29B974E900A04D41 /* coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coconut.png; sourceTree = "<group>"; };
+		0174E6EF29B9753F00A04D41 /* Failure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
 		0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvertColor.swift"; sourceTree = "<group>"; };
 		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
 		01BC544429B44ADC00AD963F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				0174E6E629B973C700A04D41 /* HttpClient.swift */,
 				0174E6E829B973E500A04D41 /* HttpResponse.swift */,
+				0174E6EF29B9753F00A04D41 /* Failure.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */,
 				014909E0288E215E00502CF3 /* MoviePreviewViewController.swift in Sources */,
 				392A64BD288890AA0030DF06 /* CollectionViewTableViewCell.swift in Sources */,
+				0174E6F029B9753F00A04D41 /* Failure.swift in Sources */,
 				014909E2288E273600502CF3 /* MovieTrailer.swift in Sources */,
 				01BC544529B44ADC00AD963F /* SplashViewController.swift in Sources */,
 				01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */,

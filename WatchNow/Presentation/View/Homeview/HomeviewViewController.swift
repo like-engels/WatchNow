@@ -9,7 +9,7 @@ import UIKit
 
 class HomeviewViewController: UIViewController {
     
-    private let sectiontitles: [Int :String] = [
+    private let sectionTitles: [Int :String] = [
         0: "Trending Movies",
         1: "Trending TV",
         2: "Popular",
