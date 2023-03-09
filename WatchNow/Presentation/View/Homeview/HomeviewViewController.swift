@@ -9,12 +9,12 @@ import UIKit
 
 class HomeviewViewController: UIViewController {
     
-    private let sectiontitles: [String] = [
-        "Trending Movies",
-        "Trending TV",
-        "Popular",
-        "Upcoming Movies",
-        "Top Rated"
+    private let sectiontitles: [Int :String] = [
+        0: "Trending Movies",
+        1: "Trending TV",
+        2: "Popular",
+        3: "Upcoming Movies",
+        4: "Top Rated"
     ]
     
     let bindings: HomeviewBindings

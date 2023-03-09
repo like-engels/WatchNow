@@ -20,6 +20,10 @@
 		014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 014909E7288E5D5D00502CF3 /* WatchNow.xcdatamodeld */; };
 		014909EB288E5F7D00502CF3 /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */; };
 		0174E6E529B96B1600A04D41 /* HomepageHeroBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E429B96B1600A04D41 /* HomepageHeroBannerView.swift */; };
+		0174E6E729B973C700A04D41 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E629B973C700A04D41 /* HttpClient.swift */; };
+		0174E6E929B973E500A04D41 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E829B973E500A04D41 /* HttpResponse.swift */; };
+		0174E6EC29B974CD00A04D41 /* coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0174E6EB29B974CD00A04D41 /* coconut.png */; };
+		0174E6EE29B974E900A04D41 /* coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0174E6ED29B974E900A04D41 /* coconut.png */; };
 		0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */; };
 		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
 		01BC544529B44ADC00AD963F /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC544429B44ADC00AD963F /* SplashViewController.swift */; };
@@ -68,6 +72,10 @@
 		014909E8288E5D5D00502CF3 /* WatchNow.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WatchNow.xcdatamodel; sourceTree = "<group>"; };
 		014909EA288E5F7D00502CF3 /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
 		0174E6E429B96B1600A04D41 /* HomepageHeroBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageHeroBannerView.swift; sourceTree = "<group>"; };
+		0174E6E629B973C700A04D41 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		0174E6E829B973E500A04D41 /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
+		0174E6EB29B974CD00A04D41 /* coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coconut.png; sourceTree = "<group>"; };
+		0174E6ED29B974E900A04D41 /* coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coconut.png; sourceTree = "<group>"; };
 		0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvertColor.swift"; sourceTree = "<group>"; };
 		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
 		01BC544429B44ADC00AD963F /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0174E6EA29B9740A00A04D41 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0174E6EB29B974CD00A04D41 /* coconut.png */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0194F8DB2899D5CE00269E40 /* NetworkAPIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +143,7 @@
 		01BC543B29B4481300AD963F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				0174E6EA29B9740A00A04D41 /* Models */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -144,6 +161,8 @@
 		01BC543D29B4482000AD963F /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				0174E6E629B973C700A04D41 /* HttpClient.swift */,
+				0174E6E829B973E500A04D41 /* HttpResponse.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -151,6 +170,7 @@
 		01BC543E29B4484900AD963F /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				0174E6ED29B974E900A04D41 /* coconut.png */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -498,7 +518,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				392A64A7288872B30030DF06 /* LaunchScreen.storyboard in Resources */,
+				0174E6EC29B974CD00A04D41 /* coconut.png in Resources */,
 				398DC59D289EBEAA00ACAA68 /* Secrets.plist in Resources */,
+				0174E6EE29B974E900A04D41 /* coconut.png in Resources */,
 				392A64A4288872B30030DF06 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0174E6E729B973C700A04D41 /* HttpClient.swift in Sources */,
 				394226002889DAC5008CA328 /* Movie.swift in Sources */,
 				014909E9288E5D5D00502CF3 /* WatchNow.xcdatamodeld in Sources */,
 				01EC0358289CA7830084E58E /* Coordinator.swift in Sources */,
@@ -521,6 +544,7 @@
 				39EAC09328A412DA00D9F3F1 /* StateManagerImplementation.swift in Sources */,
 				01BC544E29B453B300AD963F /* HomeviewBindings.swift in Sources */,
 				01BC544B29B4537D00AD963F /* HomeviewViewModel.swift in Sources */,
+				0174E6E929B973E500A04D41 /* HttpResponse.swift in Sources */,
 				0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */,
 				01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */,
 				013D1FC828A1FE1500F691E5 /* TabBarCoordinator.swift in Sources */,
