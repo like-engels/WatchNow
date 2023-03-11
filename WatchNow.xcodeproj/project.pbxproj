@@ -22,8 +22,6 @@
 		0174E6E529B96B1600A04D41 /* HomepageHeroBannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E429B96B1600A04D41 /* HomepageHeroBannerView.swift */; };
 		0174E6E729B973C700A04D41 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E629B973C700A04D41 /* HttpClient.swift */; };
 		0174E6E929B973E500A04D41 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6E829B973E500A04D41 /* HttpResponse.swift */; };
-		0174E6EC29B974CD00A04D41 /* coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0174E6EB29B974CD00A04D41 /* coconut.png */; };
-		0174E6EE29B974E900A04D41 /* coconut.png in Resources */ = {isa = PBXBuildFile; fileRef = 0174E6ED29B974E900A04D41 /* coconut.png */; };
 		0174E6F029B9753F00A04D41 /* Failure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0174E6EF29B9753F00A04D41 /* Failure.swift */; };
 		0183F8CA289DF96C009B3FD3 /* UIColor+ConvertColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */; };
 		0194F8DD2899D6C100269E40 /* NetworkAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */; };
@@ -31,6 +29,7 @@
 		01BC544829B4528500AD963F /* HomeviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC544729B4528500AD963F /* HomeviewViewController.swift */; };
 		01BC544B29B4537D00AD963F /* HomeviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC544A29B4537D00AD963F /* HomeviewViewModel.swift */; };
 		01BC544E29B453B300AD963F /* HomeviewBindings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BC544D29B453B300AD963F /* HomeviewBindings.swift */; };
+		01BCF50129BD3C6700714AFC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BCF50029BD3C6700714AFC /* TabBarViewController.swift */; };
 		01EC0358289CA7830084E58E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0357289CA7830084E58E /* Coordinator.swift */; };
 		01EC035A289CAF390084E58E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC0359289CAF390084E58E /* AppCoordinator.swift */; };
 		01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */; };
@@ -75,8 +74,6 @@
 		0174E6E429B96B1600A04D41 /* HomepageHeroBannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomepageHeroBannerView.swift; sourceTree = "<group>"; };
 		0174E6E629B973C700A04D41 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		0174E6E829B973E500A04D41 /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
-		0174E6EB29B974CD00A04D41 /* coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coconut.png; sourceTree = "<group>"; };
-		0174E6ED29B974E900A04D41 /* coconut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coconut.png; sourceTree = "<group>"; };
 		0174E6EF29B9753F00A04D41 /* Failure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Failure.swift; sourceTree = "<group>"; };
 		0183F8C9289DF96C009B3FD3 /* UIColor+ConvertColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+ConvertColor.swift"; sourceTree = "<group>"; };
 		0194F8DC2899D6C100269E40 /* NetworkAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAPIManager.swift; sourceTree = "<group>"; };
@@ -84,6 +81,7 @@
 		01BC544729B4528500AD963F /* HomeviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeviewViewController.swift; sourceTree = "<group>"; };
 		01BC544A29B4537D00AD963F /* HomeviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeviewViewModel.swift; sourceTree = "<group>"; };
 		01BC544D29B453B300AD963F /* HomeviewBindings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeviewBindings.swift; sourceTree = "<group>"; };
+		01BCF50029BD3C6700714AFC /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		01EC0357289CA7830084E58E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		01EC0359289CAF390084E58E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		01EC035B289CBC6C0084E58E /* SplashscreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashscreenViewController.swift; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 		0174E6EA29B9740A00A04D41 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0174E6EB29B974CD00A04D41 /* coconut.png */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,7 +170,6 @@
 		01BC543E29B4484900AD963F /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				0174E6ED29B974E900A04D41 /* coconut.png */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -189,6 +185,7 @@
 		01BC544129B4486600AD963F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				01BCF4FF29BD3A7500714AFC /* TabBarView */,
 				01BC544629B4526900AD963F /* Homeview */,
 				01BC544329B44ABB00AD963F /* Splashscreen */,
 			);
@@ -242,6 +239,14 @@
 				0174E6E429B96B1600A04D41 /* HomepageHeroBannerView.swift */,
 			);
 			path = Subviews;
+			sourceTree = "<group>";
+		};
+		01BCF4FF29BD3A7500714AFC /* TabBarView */ = {
+			isa = PBXGroup;
+			children = (
+				01BCF50029BD3C6700714AFC /* TabBarViewController.swift */,
+			);
+			path = TabBarView;
 			sourceTree = "<group>";
 		};
 		01EC035D289CBD7A0084E58E /* Splashscreen */ = {
@@ -521,9 +526,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				392A64A7288872B30030DF06 /* LaunchScreen.storyboard in Resources */,
-				0174E6EC29B974CD00A04D41 /* coconut.png in Resources */,
 				398DC59D289EBEAA00ACAA68 /* Secrets.plist in Resources */,
-				0174E6EE29B974E900A04D41 /* coconut.png in Resources */,
 				392A64A4288872B30030DF06 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -559,6 +562,7 @@
 				392A64BD288890AA0030DF06 /* CollectionViewTableViewCell.swift in Sources */,
 				0174E6F029B9753F00A04D41 /* Failure.swift in Sources */,
 				014909E2288E273600502CF3 /* MovieTrailer.swift in Sources */,
+				01BCF50129BD3C6700714AFC /* TabBarViewController.swift in Sources */,
 				01BC544529B44ADC00AD963F /* SplashViewController.swift in Sources */,
 				01EC035C289CBC6C0084E58E /* SplashscreenViewController.swift in Sources */,
 				01BC544829B4528500AD963F /* HomeviewViewController.swift in Sources */,

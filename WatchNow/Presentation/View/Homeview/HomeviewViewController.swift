@@ -9,28 +9,41 @@ import UIKit
 
 class HomeviewViewController: UIViewController {
     
-    private let sectionTitles: [Int :String] = [
-        0: "Trending Movies",
-        1: "Trending TV",
-        2: "Popular",
-        3: "Upcoming Movies",
-        4: "Top Rated"
-    ]
-    
     let bindings: HomeviewBindings
+    
+    private let homeviewTableView: UITableView = {
+        let table = UITableView(frame: .zero, style: .insetGrouped)
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        return table
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        title = "Homepage"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        view.insetsLayoutMarginsFromSafeArea = true
+        
+        homeviewTableView.delegate = bindings
+        homeviewTableView.dataSource = bindings
+        
+        view.addSubview(homeviewTableView)
 
     }
     
-    init(bindings: HomeviewBindings, coder: NSCoder) {
-        self.bindings = bindings
-        super.init()
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        homeviewTableView.frame = view.bounds
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    init(bindings: HomeviewBindings) {
+        self.bindings = bindings
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required convenience init?(coder: NSCoder) {
+        self.init(bindings: HomeviewBindings())
     }
     
 }

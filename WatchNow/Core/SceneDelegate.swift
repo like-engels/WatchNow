@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    private var appCoordinator: AppCoordinator?
+    let tabBarController = TabBarViewController()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,8 +24,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.makeKeyAndVisible()
 
 
-        appCoordinator = AppCoordinator(navigationController)
-        appCoordinator?.start()
+        // appCoordinator = AppCoordinator(navigationController)
+        // appCoordinator?.start()
+        navigationController.pushViewController(tabBarController, animated: false)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
