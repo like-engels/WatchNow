@@ -18,7 +18,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabBar.tintColor = .label
         setUI()
 
-        // Do any additional setup after loading the view.
     }
     
     func setUI() {
